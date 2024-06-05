@@ -1,0 +1,111 @@
+<HTML><HEAD>
+<TITLE>Discount Updation</TITLE>
+<script>
+
+function validateform(){
+disc=document.form1.tdisc.value
+effdt=document.form1.teffdt.value
+expdt=document.form1.texpdt.value
+
+if((disc=="")||(isNaN(disc)==true))
+{alert("Invalid discount")
+return false}
+if((effdt=="")||(checkdate(effdt)))
+{alert("Invalid Effective date\n\neg: mm/dd/yyyy")
+return false}
+if((expdt=="")||(checkdate(expdt)))
+{alert("Invalid Expiry date\n\neg: mm/dd/yyyy")
+return false}
+return true}
+
+
+function checkdate(val)
+{mn=val.substring(0,2)
+ dy=val.substring(3,5)
+ yr=val.substring(6,10)
+ slh1=val.substring(2,3)
+ slh2=val.substring(5,6)
+ dat=mn+dy+yr
+ if((isNaN(dat)==true)||(slh1!="/")||(slh2!="/")||(yr<1900)||(mn>12)||(dy>31))
+  return true}
+
+
+
+
+function checkvalue(tval,typ){
+val=tval.value
+if((val!="")&&(typ!="d"))
+ {mn=val.substring(0,2)
+ dy=val.substring(3,5)
+ yr=val.substring(6,10)
+ slh1=val.substring(2,3)
+ slh2=val.substring(5,6)
+ dat=mn+dy+yr
+ if((isNaN(dat)==true)||(slh1!="/")||(slh2!="/")||(yr<1900)||(mn>12)||(dy>31)||(!dat>0))
+  alert("Invalid date\n\neg: mm/dd/yyyy")}
+
+
+if(isNaN(document.form1.tdisc.value)==true)
+  alert("Invalid discount")
+
+
+if(tval.value=="")
+{if(typ=='d')
+alert("Invalid discount")
+if(typ=='f')
+alert("Invalid Effective date\n\neg: mm/dd/yyyy")
+if(typ=='x')
+alert("Invalid Expiry date\n\neg: mm/dd/yyyy")}
+ }
+
+
+function goback(){
+history.go(-2)
+return false}
+</script>
+</HEAD>
+<center>
+<BODY>
+<br>
+<font color=#82bcca size=4 face=times><B><u><i>Customer Discount Updation</i></u></B></font>
+<br>
+<FORM name="form1" action="../servlet/Updatecust" method="Post" onSubmit= "return validateform()">
+<input type="hidden"  name="hlogid" value= c001>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor="#182f86">
+<th colspan=2 align="center"><font color="#ffffff"> <B>&nbsp;Bobby&nbsp;Michael</B></font></th>
+<tr><td>
+<table border=0 cellpadding=2 cellspacing=0 bgcolor="#ebebed">
+<tr bgcolor=#D9DADD>
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2> Discount% :</FONT>&nbsp;&nbsp;</td>
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type=text size=14 name=tdisc value= 10.0 onChange="checkvalue(tdisc,'d')"></FONT></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2> Effective Date:</FONT>&nbsp;&nbsp;</td>
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type=text size=14 name=teffdt value=10/02/1999 onChange="checkvalue(teffdt,'f')"></FONT></td>
+</tr>
+<tr bgcolor=#D9DADD>
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2> Expiry Date :</FONT>&nbsp;&nbsp;</td><td>&nbsp;<FONT FACE=ARIAL SIZE=2>
+<input type=text size=14 name=texpdt value=10/03/1999 onChange="checkvalue(texpdt,'x')"></FONT></td>
+</tr>
+</table>
+</td></tr></table>
+<br>
+<TABLE border=0 cellpadding=0 cellspacing=0><TR>
+<TD><Input type=submit value=Submit name=bsubmit></TD>
+<TD>&nbsp;</TD><TD>&nbsp;</TD>
+<TD><Input type=reset value=Reset name=breset></TD>
+</TR>
+</TABLE>
+<br>
+<TABLE border=0 cellpadding=0 cellspacing=0 align=center><TR>
+<TD><font  face= arial size=1>|<a href="../Reliable2/itemsearch.htm">Item Lookup</a>&nbsp;|</font>
+<font  face= arial size=1><a href="../Reliable2/a.htm">Catalog Lookup</a>&nbsp;|</font>
+<font  face= arial size=1><a href="../Reliable2/a.htm" >Customer Update</a>&nbsp;|</font>
+<font  face= arial size=1><a href="../Reliable2/a.htm">How to Order</a>&nbsp;|</font>
+<font  face= arial size=1><a href="" onClick="return goback()">Back to menu</a>&nbsp;|</font>
+</TD>
+</TR></TABLE>
+</FORM>
+</BODY>
+</center>
+</HTML>

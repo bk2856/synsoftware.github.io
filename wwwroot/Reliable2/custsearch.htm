@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<SCRIPT>
+
+function checkvalue(){
+id=document.form1.tcustid.value
+if(id=="")
+{alert("Invalid Search")
+ return false}
+return true
+}
+
+</SCRIPT>
+</HEAD>
+<BODY background="images/back2.jpg">
+<FORM name="form1" action="../servlet/custsearch" method="Get" 
+    onSubmit= "return checkvalue()" > 
+<TABLE border="0" cellpadding=0 cellspacing=0 align=center>
+    <TR>
+      <TD><IMG src="images/reldescsignon.jpg" width="618" height="107" border="0"></TD>
+    </TR>
+    <TR>
+      <TD align=center><IMG src="images/custdisc.jpg" width="207" height="91" border="0"></TD>
+    </TR>
+    <TR bgcolor="#ffffff"><TD>
+
+       <TABLE  border=0 align=center cellpadding=0 cellspacing=0>
+       <TR><td><b>
+         <font face=arial size=2 color="#6064B2">&nbsp;&nbsp;Customer id:</font></b></td>
+              <td><font face=arial size=2 color="#6064B2" >&nbsp;<input type="text"
+              name="tcustid" size=10></td>
+       </TR>
+       
+      
+       <TR bgcolor="#ffffff">
+       <td colspan=2 align=center><br><input type="submit" name="bsearch" value="Search"></td>
+      </TR>
+      </TABLE>
+<hr><br><br>
+<TR>
+<TD colspan=4 align=center>&COPY;&nbsp; The Reliable Automatic Sprinkler Company Inc.</TD>
+</TR>
+</TABLE>
+</FORM>
+</BODY>
+</HTML>

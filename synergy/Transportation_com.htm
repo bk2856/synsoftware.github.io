@@ -1,0 +1,1526 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://www.transportation.com/index.jsp -->
+<HTML><HEAD><TITLE>Transportation.com</TITLE>
+<SCRIPT language=JavaScript type=text/javascript>
+  function eBusinessPopup(NewPage)
+    {
+      window.open(NewPage,"new","toolbar=no,top=0,left=50,height=300, width=500,status=yes,alwaysRaised=yes,scrollbars=yes,resizable=yes,menubar=no");
+    }
+  function referal(NewPage)
+    {
+      window.open(NewPage,"new","toolbar=no,top=0,left=50,height=200, width=450,status=yes,alwaysRaised=yes,scrollbars=yes,resizable=yes,menubar=no");
+    }
+  function discount(NewPage)
+    {
+      window.open(NewPage,"new","toolbar=no,top=0,left=50,height=500, width=450,status=yes,alwaysRaised=yes,scrollbars=yes,resizable=yes,menubar=no");
+    }
+</SCRIPT>
+
+<SCRIPT language=JavaScript type=text/javascript>
+    function openForgotWin(NewPage)
+      {
+        window.open(NewPage,"new","toolbar=no,top=0,left=50,height=300, width=400,status=yes,alwaysRaised=yes,scrollbars=no,resizable=yes,menubar=no");
+      }
+
+		function mail_f(mailId,subject)
+  		{
+  		  var src1 = "mailto:"+mailId+"?Subject="+subject;
+  		  var hWnd =  window.open(src1); if (hWnd.focus != null) hWnd.focus();
+  		  hWnd.close();
+  		  document.suggestions.submit();
+  		}
+
+    function submit()
+      {
+        document.shipperHome.linkClicked.value="advanced";
+        document.shipperHome.submit();
+      }
+
+    function openNewWin(NewPage)
+      {
+         //alert("NEwpage " + NewPage);
+         window.open(NewPage,"new","toolbar=no,top=0,left=50,height=300, width=500,status=yes"
+                   + ",alwaysRaised=yes,scrollbars=no,resizable=yes,menubar=no");
+      }
+
+		function onLoadEvent(strDt)
+  		{
+
+		fnGetDate(strDt);
+			}
+
+				<!-- axk01 chgs for quick quote -date - start -->
+		 function fnGetDate(passedDate)
+		{
+		  var pickupDate;
+		  if ((passedDate == null) || (passedDate.length == 0))
+		  {
+		    dt = new Date();
+			if (dt.getHours()>=17)
+			{
+
+			  dt.setDate(dt.getDate()+1);
+			}
+			pickupDate = fnPadLeft(eval(dt.getMonth()+ 1),'0','2') +"/"+fnPadLeft(dt.getDate(),'0','2');
+		  }
+		  else
+		  {
+		    pickupDate = passedDate;
+		  }
+		  document.shipperHome.pickupDt.value=pickupDate;
+		}
+
+		function fnPadLeft(str,charToPad,totalLength)
+		{
+		  var strReturn ="";
+		  var iStrLen = 0;
+		  if (str == null)
+		  {
+		    str = "";
+		  }
+		  strReturn = str;
+		  tempStr = new String(str);
+		  iStrLen= tempStr.length;
+		  for (var i=iStrLen;i<eval(totalLength);i++)
+		  {
+		    strReturn = charToPad + strReturn;
+		  }
+		  return strReturn;
+		}
+						<!-- //axk01 chgs for quick quote -date - end -->
+</SCRIPT>
+
+<META content=text/html;charset=iso-8859-1 http-equiv=content-type>
+<META content=no-cache http-equiv=pragma><LINK 
+href="images/style.css" rel=StyleSheet type=text/css>
+<SCRIPT language=javascript>
+
+function name_values(instring) {
+  // Assumption: ';' is a restricted character in a value.
+  // Returns an array of variable names set by this function.
+  var vars = new Array();
+  rc = "\235";
+  instring = instring.replace(/\\\;/g, rc);
+
+  var pattern = /[a-zA-Z0-9]+\=[:#a-zA-Z0-9\. \235]+/gi;
+  var y = instring.match(pattern);
+  for (i=0; i<y.length; i++) {
+    var s = y[i].split("=");
+    s[1] = s[1].replace(rc, ";");
+    vars[i] = "v_" + s[0];
+    eval(vars[i] + " = '" + s[1] + "'");
+  }
+  return vars;
+}
+
+var onClickFnCode = "";
+var orig_onClickFnCode = "";
+
+// This is a Dynamic function. Its function code is constructed
+// in onclickfn method and set in the show method.
+// This function is here in the same way as the function we
+// construct in the calendar window in case of POPUP calendar.
+// This is for the INLINE calendar - used to append selected dates
+
+function onClickFn(pday) {
+  var re = /pday/;
+  onClickFnCode = orig_onClickFnCode;
+  onClickFnCode = onClickFnCode.replace(re, "'" + pday + "'");
+  eval(onClickFnCode);
+}
+
+// Custom parameters set by the 6th argument to show_calendar function.
+// CUSTOM STRING
+var v_CloseOnSelect, v_AppendOrReplace, v_AppendChar, v_ReturnData;
+var v_InlineX, v_InlineY, v_Title;
+
+var weekend = [0,6];
+var weekendColor = "#e0e0e0";
+var fontface = "Verdana";
+var fontsize = 2;
+var cal_day;
+var before_cal_day;
+var after_cal_day;
+var before_cal_month;
+var after_cal_month;
+var after_cal_year;
+var before_cal_year;
+var YearSelected;
+
+var gNow = new Date();
+var ggWinCal;           // Really global variable pointing to the calendar window
+
+isNav = (navigator.appName.indexOf("Netscape") != -1) ? true : false;
+//document.writeln("isNav value "+isNav);
+isIE = (navigator.appName.indexOf("Microsoft") != -1) ? true : false;
+//document.writeln("isIE value "+isIE);
+
+
+Calendar.Months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+
+// Non-Leap year Month days..
+Calendar.DOMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+// Leap year Month days..
+Calendar.lDOMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+Calendar.DOW = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+Calendar.supportedFormats = ["MM/DD","MM/DD/YYYY", "MM/DD/YY", "MM-DD-YYYY", "MM-DD-YY", "DD/MON/YYYY", "DD/MON/YY", "DD-MON-YYYY", "DD-MON-YY", "DD/MONTH/YYYY", "DD/MONTH/YY", "DD-MONTH-YYYY", "DD-MONTH-YY", "MONTH DD, YYYY", "DD/MM/YYYY", "DD/MM/YY"];
+
+Calendar.count = 0;
+Calendar.Format = null;
+
+
+// For inline calendar, the default contents of the layer. (v1.3)
+Calendar.gInitText = "Infosys Calendar";
+
+function Calendar(final_cal_value, p_WinCal, cal_month, cal_year, cal_format, p_type) {
+  // Argument p_type defines if the calendar is popup or inline
+  // If cal_type is INLINE,
+  //    you must pass p_inline parameter which specifies the name of the layer
+  //    which displays the calendar inline.
+  //    --->
+
+  Calendar.count += 1;
+
+  if ((cal_month == null) && (cal_year == null))      return;
+  if (Calendar.count == 1 && YearSelected != null) {
+	  	var oldDate;
+		  if (final_cal_value != null){
+	      oldDate = retrieve_OldDate(final_cal_value);
+	  		if (oldDate[0]== null || oldDate[1] == null)
+			    YearSelected = new String(gNow.getFullYear());
+			  cal_year = YearSelected;
+	   }
+	}
+
+  if (p_WinCal == null)
+    this.gWinCal = ggWinCal;
+  else
+    this.gWinCal = p_WinCal;
+
+    this.gMonthName = Calendar.get_month(cal_month);
+    this.gMonth = new Number(cal_month);
+
+  if (cal_type == null)
+    this.gType = "POPUP";    // Default is popup
+  else
+    this.gType = cal_type;
+
+  if (this.gType == "INLINE") {
+    this.WHO = "";
+    this.INLINE = "Calendar";  // Inline Calendar Layer name
+    this.codeINLINE = "";    // Calendar code will be constructed in this var
+  } else
+    this.WHO = "window.opener.";
+
+  this.gYear = cal_year;
+  this.gFormat = cal_format;
+  this.gBGColor = "white";
+  this.gFGColor = "black";
+  this.gTextColor = "black";
+  this.gHeaderColor = "black";
+  this.gReturnItem = final_cal_value;
+  this.gTitle = "Infosys Calendar";
+  this.gCancel ="Cancel";
+}
+
+Calendar.get_month = Calendar_get_month;
+Calendar.get_daysofmonth = Calendar_get_daysofmonth;
+Calendar.get_dow = Calendar_get_dow;
+Calendar.calc_month_year = Calendar_calc_month_year;
+Calendar.print = Calendar_print;
+Calendar.CreateCalendarLayer = Calendar_CreateCalendarLayer;
+Calendar.Close = Calendar_Close;
+Calendar.Lwwrite = Calendar_Lwwrite;
+Calendar.MoveTo = Calendar_MoveTo;
+
+
+function Calendar_get_month(monthNo) {
+  return Calendar.Months[monthNo];
+}
+
+function Calendar_get_dow(dayNo) {
+  return Calendar.DOW[dayNo];
+}
+
+function Calendar_get_daysofmonth(monthNo, cal_year) {
+  /*
+  Check for leap year ..
+  1.Years evenly divisible by four are normally leap years, except for...
+  2.Years also evenly divisible by 100 are not leap years, except for...
+  3.Years also evenly divisible by 400 are leap years.
+  */
+  if ((cal_year % 4) == 0) {
+      if ((cal_year % 100) == 0 && (cal_year % 400) != 0)
+          return Calendar.DOMonth[monthNo];
+
+      return Calendar.lDOMonth[monthNo];
+  } else
+      return Calendar.DOMonth[monthNo];
+}
+
+function Calendar_calc_month_year(cal_month, cal_year, incr) {
+  /*
+  Will return an 1-D array with 1st element being the calculated month
+  and second being the calculated year
+  after applying the month increment/decrement as specified by 'incr' parameter.
+  'incr' will normally have 1/-1 to navigate thru the months.
+  */
+  var ret_arr = new Array();
+
+  if (incr == -1) {
+    // B A C K W A R D
+    if (cal_month == 0) {
+        ret_arr[0] = 11;
+        ret_arr[1] = parseInt(cal_year) - 1;
+    }
+    else {
+        ret_arr[0] = parseInt(cal_month) - 1;
+        ret_arr[1] = parseInt(cal_year);
+    }
+  } else if (incr == 1) {
+    // F O R W A R D
+    if (cal_month == 11) {
+        ret_arr[0] = 0;
+        ret_arr[1] = parseInt(cal_year) + 1;
+    }
+    else {
+        ret_arr[0] = parseInt(cal_month) + 1;
+        ret_arr[1] = parseInt(cal_year);
+    }
+  }
+
+  return ret_arr;
+}
+
+function Calendar_print() {
+  ggWinCal.print();
+}
+
+// This is for compatibility with Navigator 3, we have to create and discard one object before the prototype object exists.
+new Calendar();
+
+Calendar.prototype.setFormat = function(pFormat) {
+  var j;
+  for (j=0; j<Calendar.supportedFormats.length; j++) {
+    if (Calendar.supportedFormats[j] == pFormat)
+      Calendar.Format = pFormat;
+  }
+}
+
+Calendar.prototype.getMonthlyCalendarCode = function() {
+  var vCode = "";
+  var vHeader_Code = "";
+  var vData_Code = "";
+
+  // Begin Table Drawing code here..
+  vCode = vCode + "<TABLE BORDER=1 BGCOLOR=\"" + this.gBGColor + "\">";
+
+  vHeader_Code = this.cal_header();
+  vData_Code = this.cal_data();
+  vCode = vCode + vHeader_Code + vData_Code;
+
+  vCode = vCode + "</TABLE>";
+
+  return vCode;
+}
+
+Calendar.prototype.onclickfn = function() {
+  // This should return the code string for the onclickfn in the calendar document.
+
+  // This is the reference to the return object
+  // window.opener.document. / window.document. ... .value
+  var whois = this.WHO +
+        ((this.gType == "POPUP") ? "document." : "window.document.") +
+        this.gReturnItem + ".value";
+
+  // apchar will turn out to be either " = " or " += ''" or " += ';'"
+  var apchar = (this.returnMode == "Replace") ? " = " : " += ";
+
+  var retCode = "apchar = ''" +
+          ((this.returnMode == "Replace") ? ";" : " + ") +
+          "((" + whois + " == '') ? '' : '" + this.appendChar + "');\n" +
+        whois + apchar + "apchar + pday;\n";
+
+  return retCode;
+}
+
+Calendar.prototype.show = function() {
+  var vCode = "";
+
+  if (this.gType == "POPUP")
+    this.gWinCal.document.open();
+
+  // Setup the page...
+  this.wwrite("<html>");
+  this.wwrite("<head><title>Calendar</title>");
+
+  if (this.gType == "POPUP")
+    this.wwrite("<script language='javascript'>" +
+      "function onClickFn(pday) {\n" +
+      this.onclickfn() + "}\n<\/script>");
+  else
+    orig_onClickFnCode = this.onclickfn();
+
+// Show navigation buttons
+  var prevMMYYYY = Calendar.calc_month_year(this.gMonth, this.gYear, -1);
+  var prevMM = prevMMYYYY[0];
+  var prevYYYY = prevMMYYYY[1];
+
+  var nextMMYYYY = Calendar.calc_month_year(this.gMonth, this.gYear, 1);
+  var nextMM = nextMMYYYY[0];
+  var nextYYYY = nextMMYYYY[1];
+  var strPrev = "<img id ='InfosysCalendar' src='/images/icons/dateprevious.gif' height = '26' width = '20' border='0'>";
+  var strNext = "<img id ='InfosysCalendar' src='/images/icons/datenext.gif' height = '26' width = '20' border='0'>";
+  var strBlank ="";
+  var blnPrev = true;
+  var blnNext = true;
+
+  if ((after_cal_month != null) && (after_cal_year == prevYYYY)){
+       blnPrev = (prevMM >= after_cal_month);
+	}
+	else if ((prevMM == '11') && (parseInt(after_cal_year) == this.gYear)){
+	    blnPrev = false;
+	}
+
+  if ((before_cal_month != null) && (before_cal_year == nextYYYY)){
+		   blnNext = (nextMM <= before_cal_month);
+	 }
+	 else if ((nextMM == '0') && (before_cal_year == prevYYYY)){
+	    blnNext = false;
+	 }
+
+  if (!blnPrev) strPrev = strBlank;
+  if (!blnNext) strNext = strBlank;
+
+  strSpace = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  this.wwrite("</head>");
+
+  this.wwrite("<body " +
+      "link=\"" + this.gLinkColor + "\" " +
+      "vlink=\"" + this.gLinkColor + "\" " +
+      "alink=\"" + this.gLinkColor + "\" " +
+      "text=\"" + this.gTextColor + "\">");
+
+  this.wwrite("<TABLE BORDER=0 CELLPADDING=0 BGCOLOR='#006699'><TR><TD id ='InfosysCalendar'>" +
+  "<TABLE BORDER=0 WIDTH='100%' CELLPADDING=0 BGCOLOR='#006699'>" +
+  "<TR><TD id ='InfosysCalendar' BGCOLOR='#006699' ALIGN=LEFT>" +
+  "<A HREF=\"" +
+      "javascript:" + this.WHO + "Draw(" +
+      "'" + this.gReturnItem + "', '" + prevMM + "', '" + prevYYYY + "', '" + this.gFormat + "', '" + this.gType + "'" +
+      ");" +
+      "\">" + strPrev + "<\/A>  "+
+  "</TD><TD id ='InfosysCalendar' BGCOLOR='#006699'>" +
+  "<CENTER><FONT id ='InfosysCalendar' COLOR=white FACE='" + fontface + "' SIZE=2><B id ='InfosysCalendar'>" + strSpace + this.gMonthName + " " + this.gYear + strSpace + "</B></FONT></CENTER>" +
+  "</TD><TD id ='InfosysCalendar' BGCOLOR='#006699' ALIGN=RIGHT>" +
+  "<A HREF=\"" +
+      "javascript:" + this.WHO + "Draw(" +
+      "'" + this.gReturnItem + "', '" + nextMM + "', '" + nextYYYY + "', '" + this.gFormat + "', '" + this.gType + "'" +
+      ");" +
+      "\">" + strNext+ "<\/A></TD></TR><TR>" +
+  "<TD id ='InfosysCalendar' BGCOLOR='#006699' COLSPAN=3>");
+
+  // Get the complete calendar code for the month..
+  vCode = this.getMonthlyCalendarCode();
+  this.wwrite(vCode);
+this.wwrite("</TD></TR></TABLE><TABLE BORDER=0 WIDTH='100%' CELLPADDING=1 BGCOLOR='#006699'>" +
+    "<TR><TD BGCOLOR='#006699' ALIGN=CENTER>" +
+    "<FONT COLOR=white FACE='" + fontface + "' SIZE=2><B>" +
+    "<A HREF='javascript:" +
+    this.WHO + "Calendar.Close(\"" + this.gType + "\", \"" + this.INLINE + "\");' " +
+    "STYLE='color:white'>" +
+  this.gCancel+ "</A></B></FONT></TD></TR></TABLE>");
+
+  this.wwrite("</TD></TR></TABLE>");
+
+  this.wwrite("</font></body></html>");
+
+  if (this.gType == "POPUP")
+    this.gWinCal.document.close();
+
+  if (this.gType == "INLINE")
+    Calendar.Lwwrite(this.codeINLINE, this.INLINE);
+}
+
+
+function Calendar_Close(pType, pINLINE, YearChoosen) {
+	if (YearChoosen != null && YearChoosen.length >0)
+	    YearSelected = YearChoosen;
+	Calendar.count = 0;	
+  if (pType == "POPUP")
+    ggWinCal.close();
+  if (pType == "INLINE")
+    Calendar.Lwwrite(Calendar.gInitText, pINLINE)
+}
+
+
+Calendar.prototype.cal_header = function() {
+  var vCode = "";
+
+  vCode = vCode + "<TR>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Sun</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Mon</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Tue</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Wed</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Thu</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Fri</B></FONT></TD>";
+  vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='16%'><FONT id ='InfosysCalendar' SIZE='2' FACE='" + fontface + "' COLOR='" + this.gHeaderColor + "'><B id ='InfosysCalendar'>Sat</B></FONT></TD>";
+  vCode = vCode + "</TR>";
+
+  return vCode;
+}
+
+Calendar.prototype.cal_data = function() {
+  var vDate = new Date();
+  vDate.setDate(1);
+  vDate.setMonth(this.gMonth);
+  vDate.setFullYear(this.gYear);
+
+  var vFirstDay=vDate.getDay();
+  var vDay=1;
+  var vLastDay=Calendar.get_daysofmonth(this.gMonth, this.gYear);
+  var vOnLastDay=0;
+  var vCode = "";
+
+  /*
+  Get day for the 1st of the requested month/year..
+  Place as many blank cells before the 1st day of the month as necessary.
+  */
+  vCode = vCode + "<TR>";
+  for (i=0; i<vFirstDay; i++) {
+      vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'" + this.write_weekend_string(i) + "><FONT SIZE='2' id ='InfosysCalendar' FACE='" + fontface + "' COLOR='gray'>&nbsp;&nbsp;&nbsp;</FONT></TD>";
+  }
+
+  // If closeable...
+  if (this.closeable) {
+    closecodeP = ((this.gType=="POPUP") ? "window.close();" : "");
+    closecodeI = "Calendar.Close(\"" + this.gType + "\", \"" + this.INLINE + "\" , \"" + this.gYear + "\"); ";
+  } else {
+    closecodeP = "";
+    closecodeI = "void(0);' ";
+  }
+
+  var whois = this.WHO +
+        ((this.gType == "POPUP") ? "document." : "window.document.") +
+        this.gReturnItem + ".value";
+
+  // Write rest of the 1st week
+  for (j=vFirstDay; j<7; j++) {
+		var strNumberLink = "<A HREF='javascript:" + closecodeI + "' " +"onClick=\"onClickFn('" +
+			     ((this.returnData == "Date") ? this.format_data(vDay) :this.format_dow(vDay)) +"');"+
+			     closecodeP +"\">" +this.format_day(vDay) +"<\/A>" ;
+
+   if ((after_cal_day != null ) && (vDay < after_cal_day) && (this.gMonth == after_cal_month) && (this.gYear == after_cal_year))
+   		strNumberLink  = "x";
+   if ((before_cal_day != null ) && (vDay > before_cal_day) && (this.gMonth == before_cal_month) && (this.gYear == before_cal_year))
+	 		strNumberLink  = "x";
+
+    vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%' ALIGN=CENTER " + this.write_weekend_string(j) +
+        "><FONT SIZE='2' id ='InfosysCalendar' FACE='" + fontface + "'>" +
+        strNumberLink + "</FONT></TD>";
+
+    vDay=vDay + 1;
+  }
+  vCode = vCode + "</TR>";
+
+  // Write the rest of the weeks
+  for (k=2; k<7; k++) {
+    vCode = vCode + "<TR>";
+
+    for (j=0; j<7; j++) {
+
+			var strNumberLink = "<A HREF='javascript:" + closecodeI + "' " +"onClick=\"onClickFn('" +
+			     ((this.returnData == "Date") ? this.format_data(vDay) :this.format_dow(vDay)) +"');"+
+			     closecodeP +"\">" +this.format_day(vDay) +"<\/A>" ;
+			if ((after_cal_day != null ) && (vDay < after_cal_day) && (this.gMonth == after_cal_month) && (this.gYear == after_cal_year))
+			   		strNumberLink  = "x";
+      if ((before_cal_day != null ) && (vDay > before_cal_day) && (this.gMonth == before_cal_month) && (this.gYear == before_cal_year))
+			   		strNumberLink  = "x";
+
+      vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%' ALIGN=CENTER" + this.write_weekend_string(j) +
+          "><FONT SIZE='2' id ='InfosysCalendar' FACE='" + fontface + "'>" +
+        strNumberLink + "</FONT></TD>";
+
+      vDay=vDay + 1;
+
+      if (vDay > vLastDay) {
+        vOnLastDay = 1;
+        break;
+      }
+    }
+
+    if (j == 6)
+      vCode = vCode + "</TR>";
+    if (vOnLastDay == 1)
+      break;
+  }
+
+  // Fill up the rest of last week with proper blanks, they are not links.
+  for (m=1; m<(7-j); m++) {
+      vCode = vCode + "<TD id ='InfosysCalendar' WIDTH='14%'" + this.write_weekend_string(j+m) +
+        "><FONT SIZE='2' id ='InfosysCalendar' FACE='" + fontface + "' COLOR='gray'>&nbsp;&nbsp;&nbsp;</FONT></TD>";
+  }
+
+  return vCode;
+}
+
+Calendar.prototype.format_day = function(vday) {
+  var vNowDay = gNow.getDate();
+  var vNowMonth = gNow.getMonth();
+  var vNowYear = gNow.getFullYear();
+  if (YearSelected != null) vNowYear = YearSelected;
+	//if (vday == vNowDay && this.gMonth == vNowMonth && this.gYear == vNowYear)
+	// Change made here to select the current day
+	if (vday == cal_day && this.gMonth.toString() == cal_month.toString() && this.gYear == vNowYear)
+      return ("<FONT id ='InfosysCalendar' COLOR=\"RED\"><B id ='InfosysCalendar'>" + vday + "</B></FONT>");
+  else
+      return ("<FONT id ='InfosysCalendar'>" + vday + "</FONT>");
+}
+
+Calendar.prototype.write_weekend_string = function(vday) {
+  var i;
+
+  // Return special formatting for the weekend day.
+  for (i=0; i<weekend.length; i++) {
+      if (vday == weekend[i])
+          return (" BGCOLOR=\"" + weekendColor + "\"");
+  }
+
+  return "";
+}
+
+Calendar.prototype.format_data = function(p_day) {
+  var vData;
+  var vMonth = 1 + this.gMonth;
+  vMonth = (vMonth.toString().length < 2) ? "0" + vMonth : vMonth;
+  var vMon = Calendar.get_month(this.gMonth).substr(0,3).toUpperCase();
+  var vFMon = Calendar.get_month(this.gMonth).toUpperCase();
+  var vY4 = new String(this.gYear);
+  var vY2 = new String(this.gYear.substr(2,2));
+  var vDD = (p_day.toString().length < 2) ? "0" + p_day : p_day;
+
+  switch (this.gFormat) {
+      case "MM\/DD" :
+        vData = vMonth + "\/" + vDD;
+      break;
+      case "MM\/DD\/YYYY" :
+        vData = vMonth + "\/" + vDD + "\/" + vY4;
+        break;
+      case "MM\/DD\/YY" :
+        vData = vMonth + "\/" + vDD + "\/" + vY2;
+        break;
+      case "MM-DD-YYYY" :
+        vData = vMonth + "-" + vDD + "-" + vY4;
+        break;
+      case "MM-DD-YY" :
+        vData = vMonth + "-" + vDD + "-" + vY2;
+        break;
+
+      case "DD\/MON\/YYYY" :
+        vData = vDD + "\/" + vMon + "\/" + vY4;
+        break;
+      case "DD\/MON\/YY" :
+        vData = vDD + "\/" + vMon + "\/" + vY2;
+        break;
+      case "DD-MON-YYYY" :
+        vData = vDD + "-" + vMon + "-" + vY4;
+        break;
+      case "DD-MON-YY" :
+        vData = vDD + "-" + vMon + "-" + vY2;
+        break;
+
+      case "DD\/MONTH\/YYYY" :
+        vData = vDD + "\/" + vFMon + "\/" + vY4;
+        break;
+      case "DD\/MONTH\/YY" :
+        vData = vDD + "\/" + vFMon + "\/" + vY2;
+        break;
+      case "DD-MONTH-YYYY" :
+        vData = vDD + "-" + vFMon + "-" + vY4;
+        break;
+      case "DD-MONTH-YY" :
+        vData = vDD + "-" + vFMon + "-" + vY2;
+        break;
+      case "MONTH DD, YYYY" :
+        vData = vFMon + " " + vDD + ", " + vY4;
+        break;
+      case "DD\/MM\/YYYY" :
+        vData = vDD + "\/" + vMonth + "\/" + vY4;
+        break;
+      case "DD\/MM\/YY" :
+        vData = vDD + "\/" + vMonth + "\/" + vY2;
+        break;
+      case "DD-MM-YYYY" :
+        vData = vDD + "-" + vMonth + "-" + vY4;
+        break;
+      case "DD-MM-YY" :
+        vData = vDD + "-" + vMonth + "-" + vY2;
+        break;
+
+      default :
+        vData = vMonth + "\/" + vDD + "\/" + vY4;
+  }
+
+  return vData;
+}
+
+Calendar.prototype.format_dow = function(p_day) {
+  var vData;
+  var vMonth = 1 + this.gMonth;
+
+  vMonth = (vMonth.toString().length < 2) ? "0" + vMonth : vMonth;
+  var vMon = Calendar.get_month(this.gMonth).substr(0,3).toUpperCase();
+  var vFMon = Calendar.get_month(this.gMonth).toUpperCase();
+  var vY4 = new String(this.gYear);
+  var vDD = (p_day.toString().length < 2) ? "0" + p_day : p_day;
+
+  var vDate = new Date(vMonth + "\/" + vDD + "\/" + vY4);
+  vData = Calendar.get_dow(vDate.getDay());
+
+  return vData;
+}
+
+/*
+Calendar Writing Functions
+*/
+Calendar.prototype.wwrite = function(wtext) {
+  if (this.gType == "POPUP")
+    this.gWinCal.document.writeln(wtext);
+  else {
+    // Keep adding to the codeINLINE variable.
+    this.codeINLINE += wtext;
+  }
+}
+
+
+function Calendar_CreateCalendarLayer(pLeft, pTop, pInitText) {
+  /* IMPORTANT :
+  If you use relative positioning of this layer, use LAYER Tag for Netscape.
+  If you want absolute positioning, use DIV tag for Netscape.
+  */
+  if (pInitText == null)
+    pInitText = Calendar.gInitText;
+  else
+    Calendar.gInitText = pInitText;
+
+  v_InlineX = pLeft;
+  v_InlineY = pTop;
+  
+  if (isIE)
+    document.writeln("<DIV ID=\"" + "Calendar" + "\" STYLE=\"" +
+    "position:absolute;top:" + pTop + ";left:" + pLeft + ";" +
+    "\">" + pInitText + "<\/DIV>");
+  //tlmchange	
+  //else if (isNav)
+  //  document.writeln("<LAYER ID=\"" + "Calendar" + "\" STYLE=\"" +
+  //  "position:absolute;top:" + pTop + ";left:" + pLeft + ";" +
+  //  "\">" + pInitText + "<\/LAYER>");
+}
+
+function Calendar_Lwwrite(pText, pINLINE) {
+  if (isIE) {
+		    document.all[pINLINE].innerHTML = pText;
+		  } else if (isNav) {
+		    var lyr = document.layers[pINLINE].document;
+		    document.layers[pINLINE].visibility ="show";
+		    lyr.open();
+		    lyr.write(pText);
+		    lyr.close();
+		    if (pText == ""){
+		      document.layers[pINLINE].visibility ="hide";
+		      lyr.close();
+			  }
+  }
+}
+
+function Calendar_MoveTo(pX, pY, pINLINE) {
+  if (isIE) {
+    document.all[pINLINE].style.top = pY;
+    document.all[pINLINE].style.left = pX;
+  } else if (isNav) {
+    document.layers[pINLINE].top = pY;
+    document.layers[pINLINE].left = pX;
+  }
+}
+/* ******************************************************************************* */
+/*
+Calendar Draw Function
+*/
+function Draw(final_cal_value, cal_month, cal_year, cal_format, cal_type, cal_control) {
+  var p_WinCal = ggWinCal;
+
+  gCal = new Calendar(final_cal_value, p_WinCal, cal_month, cal_year, cal_format, cal_type);
+  /*
+     *Details of the design of calendar
+  */
+  gCal.gBGColor="white";
+  gCal.gLinkColor="black";
+  gCal.gTextColor="black";
+  gCal.gHeaderColor="darkgreen";
+  /*
+    * Read Custom parameters from the custom string here..
+  */
+  if (cal_control && cal_control != "")
+    var vvars = name_values(cal_control);
+
+  gCal.closeable = v_CloseOnSelect ?
+          ((v_CloseOnSelect == "Yes") ? true : false)
+          : false;
+
+  gCal.returnMode = v_AppendOrReplace ?
+          v_AppendOrReplace : "Replace";
+
+  gCal.returnData = v_ReturnData ?
+          v_ReturnData : "Date";
+
+  // Character to be added For Append mode
+  gCal.appendChar = (gCal.returnMode == "Append") ?
+          v_AppendChar ? v_AppendChar : ";"
+          : "";
+  /*
+    *X and Y Coordinates for INLINE Calendar
+    *It either comes from the Calendar_CreateCalendarLayer function or
+  */
+  gCal.InlineX = v_InlineX ? v_InlineX : 100;
+  gCal.InlineY = v_InlineY ? v_InlineY : 100;
+  /*
+    *Re-position INLINE Calendar to the coordinates passed
+  */
+  if (gCal.gType == "INLINE")
+    Calendar.MoveTo(gCal.InlineX, gCal.InlineY, gCal.INLINE);
+
+  gCal.gTitle = v_Title ? v_Title : gCal.gMonthName + "/" + gCal.gYear;
+  /*
+  * Choose appropriate show function
+  */
+  gCal.show();
+}
+
+/* ******************************************************************************* */
+/* Monthly Calendar Code Starts here
+ * After the button is clicked the control comes here
+ * This checks the arguments passed to the function
+ * show_caledar(), and thereby decides whether it should be a pop up window or inline calendar
+ * show_calendar('MForm.mydate1','200','400','1/15/2000','12/28/2001','INLINE')
+ * @parameter1 --> formname.date1, @parameter2 --> x coordinate, @parameter3 --> y cordinate
+ * @parameter4 --> from date im mm/dd/yyyy format : can be null if to be showed all
+ * @parameter5 --> till date in mm/dd/yyyy format  : can be null if to be showed all
+ * @parameter6 --> can be 'INLINE' or 'POPUP' : default is INLINE if not passed
+ * @parameter7 --> Date format for display.The currently supported date formats are  
+ *                 defined in Calendar.supportedFormats array.If this argument is null,
+ *                 date will be displayed in 'MM/DD' format.
+ *
+*/
+function show_calendar() {
+  /*
+    cal_month : 0-11 for Jan-Dec; 12 for All Months.
+    cal_year  : 4 - digit year
+    cal_format: Date format (mm/dd, mm/dd/yyyy, dd/mm/yy, ...)
+    final_cal_value  : Date value to be reurned and placed in textbox.
+    cal_type  : POPUP/INLINE Calendar
+    cal_control: String of customizable name/value pair parameters
+                 1. takes care of whether the calendar should be closed on selection
+                 2. whether the date should be appended or replaced
+                 3. the x and y co-ordinates (the placement of the calendar) for INLINE
+  */
+  var arrDateBefore;
+  var arrDateAfter;
+  var strDateBefore;
+  var strDateAfter;
+
+  final_cal_value = arguments[0];
+  //window.event.cancelBubble = true;
+
+  var oldDate = retrieve_OldDate(final_cal_value);
+  if (oldDate[0]== null || oldDate[1] == null){
+    cal_month = new String(gNow.getMonth());
+    cal_day = new String(gNow.getDate());
+  }
+  else{
+    cal_month = new String(oldDate[0]);
+    cal_day = new String(oldDate[1]);
+  }
+  
+
+  /*
+  * Checks if the month is available in the passed argument
+  * if not (i.e if nulll) then current month is taken
+  */
+
+  // Getting the limit months and date before and after
+
+  //cal_month = new String(gNow.getMonth());
+  cal_year = new String(gNow.getFullYear().toString());
+  if (arguments[6] != null)
+  {
+     cal_format = arguments[6];
+  }
+  else
+  {
+     cal_format = "MM/DD";
+  }
+	/*
+     * Checks if the calendar should be closed on selection or not
+     * Also checks whether the date should be appended or overwritten
+     * if not (i.e if nulll) then Close on select and Replace
+     * Modify this string to modify the functionality
+
+  */
+    cal_control = "CloseOnSelect=Yes;AppendOrReplace=Replace;AppendChar=';';ReturnData=Date;Title=Calendar;";
+  /*
+     * Appending the cal_control with the x and y coordinates
+     * They should be passed in single quotes or just digits
+  */
+  if (arguments[1] != null && arguments[2] != null)
+      cal_control = cal_control +"InlineX="+arguments[1]+";InlineY="+arguments[2]+";";
+
+  if (arguments[3] == null){
+        after_cal_day = null;
+				after_cal_month = null;
+				after_cal_year = null;
+	}
+	else{
+
+			  strDateAfter = (typeof(arguments[3]) == "number") ? arguments[1].toString() : arguments[3];
+        arrDateAfter = strDateAfter.split("/");
+			  if (arrDateAfter[0].charAt(0) == '0') arrDateAfter[0] = arrDateAfter[0].charAt(1);
+			  if (arrDateAfter[1].charAt(0) == '0') arrDateAfter[1] = arrDateAfter[1].charAt(1);
+			  after_cal_month = parseInt(arrDateAfter[0]) -1;
+			  after_cal_day = parseInt(arrDateAfter[1]);
+			  if ((arrDateAfter[2].length == 4) && !(CheckCharcters(arrDateAfter[2])))
+			    after_cal_year = parseInt(arrDateAfter[2]);
+			  else
+			    after_cal_year = null;	     
+	}
+
+  if (arguments[4] == null){
+			  before_cal_day = null;
+				before_cal_month = null;
+				before_cal_year = null;
+	}
+	else{
+			  strDateBefore = (typeof(arguments[4]) == "number") ? arguments[1].toString() : arguments[4];
+				arrDateBefore = strDateBefore.split("/");
+			  if (arrDateBefore[0].charAt(0) == '0') arrDateBefore[0] = arrDateBefore[0].charAt(1);
+			  if (arrDateBefore[1].charAt(0) == '0') arrDateBefore[1] = arrDateBefore[1].charAt(1);
+			  before_cal_month = parseInt(arrDateBefore[0])- 1;
+			  before_cal_day = parseInt(arrDateBefore[1]);
+			  if ((arrDateBefore[2].length == 4) && !(CheckCharcters(arrDateBefore[2])))
+			    before_cal_year = parseInt(arrDateBefore[2]);
+			  else
+			    before_cal_year = null;				
+	}
+  /*if ((before_cal_month < after_cal_month) ||((before_cal_month == after_cal_month) && (before_cal_day < after_cal_day))){
+			after_cal_day = null;
+			after_cal_month = null;
+			before_cal_day = null;
+			before_cal_month = null;
+
+	}*/
+
+  if (arguments[5] == null){
+      cal_type = "INLINE";
+  }
+  else
+  cal_type = arguments[5];
+
+  // Uncomment this to make popup type for netscape
+ /* if (navigator.appName.indexOf("Netscape") != -1){
+  cal_type =  "POPUP";
+  }*/
+  
+  if (cal_type == "POPUP") {
+    vWinCal = window.open("", "Calendar",
+        "width=260 ,height=260,status=no,resizable=no,toolbar=no,resize=no,menubar=no");
+    vWinCal.opener = self;
+    vWinCal.screenX = 820;
+    vWinCal.screenY = 620;
+    vWinCal.focus();
+    ggWinCal = vWinCal;
+  }
+
+  Draw(final_cal_value, cal_month, cal_year, cal_format, cal_type, cal_control);
+}
+
+
+function retrieve_OldDate(fieldName) {
+  var blnOK = true;
+  var strFeild = eval("document."+fieldName+".value");
+  /*
+  * Check if there is already a value in the textbox : if yes
+  * splitting the dates into two fields 1. month 2. date in the text box
+  */
+  var arrDate = strFeild.split("/");
+  if (arrDate.length == 2){ // when there are only two fields month and date
+    if (arrDate[0] == null || arrDate[0].length == 0) blnOK = false;
+    if (arrDate[1] == null || arrDate[0].length == 0) blnOK = false;
+
+    /*
+				Checking for each field if length is not greater than 2
+		*/
+     if (arrDate[0].length > 2 || arrDate[1].length > 2){
+		        blnOK = false;
+		}
+		/*
+		Checking if all the characters are digits are not for month
+		*/
+     	if((blnOK) && (CheckCharcters(arrDate[0]))){
+				blnOK = false;
+			}
+	  /*
+				Checking if all the characters are digits are not for day
+		*/
+      if((blnOK) && (CheckCharcters(arrDate[1]))){
+				blnOK = false;
+			}
+		/*
+				Checking if month is less than 12 and day is less than 31
+		*/
+		var vNowYear = gNow.getFullYear();
+		if (arrDate[0].charAt(0) =='0') arrDate[0] = arrDate[0].charAt(1); // removing zeros e.g 09 by 9
+		if (arrDate[1].charAt(0) =='0') arrDate[1] = arrDate[1].charAt(1);
+		if ((blnOK) && (parseInt(arrDate[0]) > 12 || parseInt(arrDate[0]) <= 0)){
+				blnOK = false;
+		}
+		if ((blnOK) && (parseInt(arrDate[1]) > Calendar.get_daysofmonth(parseInt(arrDate[0])-1,vNowYear) || parseInt(arrDate[1]) <= 0)){
+				blnOK = false;
+		}
+	}
+  else{
+    blnOK = false;
+  }
+  if (blnOK){
+			arrDate[0] = parseInt(arrDate[0]) - 1;
+	    arrDate[1] = parseInt(arrDate[1]);
+	}
+	else{
+		  arrDate[0] = null;
+	    arrDate[1] = null;
+	}
+  return arrDate;
+}
+
+function CheckCharcters(strDate){
+for(var iCount=0;iCount<strDate.length;iCount++){
+    var cChar=strDate.charAt(iCount);
+    	if((cChar ==' ') || !(isdigit(cChar))){
+        return true;
+			}
+	  }
+return false;
+}
+
+// checks whether the char is an inetger or not
+function isdigit(cChar){
+	return(cChar>='0'&&cChar<='9');
+}
+
+// closes the claendar on clicking elsewhere
+function CloseCalOnClkOfForm(){
+window.event.cancelBubble = true;
+var strTagName= window.event.srcElement.id;
+if (strTagName != "InfosysCalendar"){ // these tags are used in calendar : font is neglected
+ 	Calendar.Close("INLINE" ,"Calendar");
+	}  
+}
+
+
+/* ******************************************************************************* */
+/* *********************************EOF******************************************* */
+
+</SCRIPT>
+
+<SCRIPT language=Javascript type=text/javascript>
+		 Calendar.CreateCalendarLayer(10, 275, "");
+		if (navigator.appName.indexOf("Netscape") != -1){
+				//document.captureEvents(Event.CLICK);
+				//document.onclick=CloseCalOnClkOfForm;
+		}
+		</SCRIPT>
+<!-- Insert InfoBox messages here -->
+<META content="MSHTML 5.00.2314.1000" name=GENERATOR></HEAD>
+<BODY bgColor=white leftMargin=0 onload="onLoadEvent('');" topMargin=0 
+marginheight="0" marginwidth="0">
+<DIV id=overDiv 
+style="POSITION: absolute; VISIBILITY: hidden; Z-INDEX: 1000"></DIV>
+<SCRIPT language=JavaScript src="images/infobox.JS"></SCRIPT>
+<!-------   header include --->
+<FORM name=HeaderForm>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TBODY>
+  <TR>
+    <TD background=images/headerbackground.gif vAlign=bottom 
+    width=200><IMG border=0 height=16 
+      src="images/lineabovelogo.gif" width=175></TD>
+    <TD align=right background=images/headerbackground.gif 
+    class=headerwhite width="99%"><A class=headerwhite 
+      href="http://www.transportation.com/services/index.jsp">Services</A> | <!--<a href="/business/index.jsp" class="headerwhite">Business Resources</a> | --><A 
+      class=headerwhite 
+      href="http://www.transportation.com/about/index.jsp">About Us</A> | <A 
+      class=headerwhite 
+      href="http://www.transportation.com/site/sitemap.jsp">Site Map</A> | <A 
+      class=headerwhite 
+      href="http://www.transportation.com/help/index.jsp">Help</A>&nbsp;&nbsp;</TD>
+    <TD align=right background=images/headerbackground.gif 
+    width="1%"></TD></TR>
+  <TR>
+    <TD width=200><A href="http://www.transportation.com/index.jsp"><IMG 
+      border=0 height=31 hspace=10 
+      src="images/sitelogotrimmed.gif" width=154></A></TD>
+    <TD vAlign=top width="99%">
+      <TABLE border=0 cellPadding=4 cellSpacing=0 width="100%">
+        <TBODY>
+        <TR>
+          <TD align=right><SPAN 
+            class=bodymidblack2><B>Welcome:&nbsp;</B></SPAN><SPAN 
+            class=bodymidblack2><A 
+            href="http://www.transportation.com/util/redirect.jsp">Login</A> | 
+            <A 
+            href="http://www.transportation.com/servlet/RegistrationController?mode=new">Register</A></SPAN></TD></TR></TBODY></TABLE>
+      <SCRIPT language=JavaScript type=text/javascript>
+
+							function fnShowAppsArea()
+
+							{
+
+
+
+							   var strSelection = document.HeaderForm.navigation.options[document.HeaderForm.navigation.selectedIndex].value;
+
+				                           if (strSelection.length >0 && strSelection != "DEFAULT" && strSelection != "DUMMY")
+
+					                   {
+
+				                              window.location.href = strSelection;
+
+							   }
+
+							}
+
+
+
+						</SCRIPT>
+      <IMG alt=Navigate: height=7 src="images/navigate.gif" 
+      width=39><BR><SELECT name=navigation 
+        onchange=javascript:fnShowAppsArea()><OPTION 
+        value="">&nbsp;</OPTION><OPTION selected value=DEFAULT>What do you want 
+        to do?</OPTION><OPTION value=DUMMY>Shippers:</OPTION><OPTION 
+        value=/servlet/FCController?fromPage=NavigationBar>&nbsp;&nbsp;&nbsp;Get 
+        a shipping quote</OPTION><OPTION 
+        value=/tm/matching/ship_post.jsp>&nbsp;&nbsp;&nbsp;Post a shipment for 
+        matches</OPTION><OPTION 
+        value=/servlet/FCController?fromPage=shipper_home.jsp&amp;linkClicked=sideLinks>&nbsp;&nbsp;&nbsp;View 
+        your shipments</OPTION><OPTION 
+        value=/tm/matching/eq_search.jsp>&nbsp;&nbsp;&nbsp;Search for 
+        equipment</OPTION><OPTION value=DUMMY>Carriers:</OPTION><OPTION 
+        value=/tm/matching/eq_post.jsp>&nbsp;&nbsp;&nbsp;Post equipment for 
+        matches</OPTION><OPTION 
+        value=/tm/matching/eq_manage.jsp>&nbsp;&nbsp;&nbsp;View your 
+        equipment</OPTION><OPTION 
+        value=/tm/matching/ship_search.jsp>&nbsp;&nbsp;&nbsp;Search for 
+        shipments</OPTION><OPTION 
+        value=/classifieds/index.jsp>Classifieds</OPTION><OPTION 
+        value=/index.jsp>Go to home page</OPTION></SELECT><!--<img src="/images/buttons/gobutton.gif" width="27" height="19" border="0" align="absmiddle" hspace="5">--> 
+    </TD>
+    <TD vAlign=top width="1%"></TD></TR>
+  <TR>
+    <TD width=200><IMG border=0 height=1 
+      src="images/clear.gif" width=200></TD>
+    <TD vAlign=top width="99%"></TD>
+    <TD vAlign=top width="1%"></TD></TR></TBODY></TABLE><BR></FORM>
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=174><IMG border=0 height=1 
+      src="images/clear.gif" width=174></TD>
+    <TD rowSpan=2 vAlign=top width=26><IMG border=0 height=1 
+      src="images/clear.gif" width=26></TD>
+    <TD vAlign=top width="99%"></TD>
+    <TD rowSpan=2 vAlign=top width="1%"><IMG border=0 height=1 
+      src="images/clear.gif" width=1></TD></TR>
+  <TR>
+    <TD vAlign=top width=174><!--********************************************************************************************-->
+      <TABLE border=0 cellPadding=5 cellSpacing=0 width=174>
+        <TBODY>
+        <TR>
+          <TD rowSpan=3><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD background=images/sidebar_header_background.gif 
+          height="1%"><B><SPAN class=bodymidblack2>Go to my home 
+            page</SPAN></B></TD>
+          <TD background=images/vertical_left_line_3.gif 
+          rowSpan=2><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/top_left_line_1.gif>
+            <FORM action=/index.jsp method=post name=login>
+            <TABLE border=0 cellPadding=2 cellSpacing=0 width="100%">
+              <TBODY>
+              <TR>
+                <TD background=images/clear.gif 
+                  width="1%"><SPAN class=bodysmallorange>Login ID:</SPAN></TD>
+                <TD background=images/clear.gif 
+                  width="99%"><INPUT name=username size=5></TD></TR>
+              <TR>
+                <TD background=images/clear.gif 
+                  width="1%"><SPAN class=bodysmallorange>Password:</SPAN></TD>
+                <TD background=images/clear.gif 
+                  width="99%"><INPUT name=password size=5 type=password></TD></TR>
+              <TR>
+                <TD background=images/clear.gif 
+                width="1%"></TD>
+                <TD background=images/clear.gif 
+                  width="99%"><INPUT alt=login border=0 name=login 
+                  src="images/loginbutton.gif" type=image 
+                  value=Submit> </TD></TR></TBODY></TABLE>&nbsp;&nbsp;<A 
+            href="javascript:openForgotWin('/profile/member/forgot_pass.jsp')"><SPAN 
+            class=bodysmallblack>Help, I forgot my password</SPAN></A> 
+        </TD></FORM></TR>
+        <TR>
+          <TD 
+          background=images/horizontal_top_line_2.gif>&nbsp;</TD>
+          <TD>&nbsp;</TD></TR></TBODY></TABLE><!--********************************************************************************************-->
+      <TABLE border=0 cellPadding=5 cellSpacing=0 width=174>
+        <FORM name=join>
+        <TBODY>
+        <TR>
+          <TD rowSpan=3><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD background=images/sidebar_header_background.gif 
+          height="1%"><B><SPAN class=bodymidblack2>Not a member? It's 
+            free.</SPAN></B></TD>
+          <TD background=images/vertical_left_line_3.gif 
+          rowSpan=2><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/top_left_line_1.gif><SPAN 
+            class=bodymidblack2>Ready to do 
+            business?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;Yes! 
+            <A href='javascript:fnSubmittoRegController("new");'>Join us</A>. 
+            <BR>&nbsp;&nbsp;&nbsp;Not yet? <A 
+            href="http://www.transportation.com/services/benefits.jsp">Tell me 
+            more</A>. </SPAN></TD></TR>
+        <TR>
+          <TD 
+          background=images/horizontal_top_line_2.gif>&nbsp;</TD>
+          <TD>&nbsp;</TD></TR><INPUT name=mode type=hidden>
+        <SCRIPT language=JavaScript type=text/javascript>
+			function fnSubmittoRegController(strMode)
+			{
+			  document.join.mode.value = strMode;
+			  document.join.method = "Post";
+			  document.join.action ="/servlet/RegistrationController";
+			  document.join.submit();
+			}
+			</SCRIPT>
+         </FORM></TBODY></TABLE>
+      <TABLE border=0 cellPadding=5 cellSpacing=0 width=174>
+        <TBODY>
+        <TR>
+          <TD rowSpan=5><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD background=images/sidebar_header_background.gif 
+          height="1%"><B><SPAN class=bodymidblack2>Success 
+          stories</SPAN></B></TD>
+          <TD background=images/vertical_left_line_3.gif 
+          rowSpan=2><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/top_left_line_1.gif><SPAN 
+            class=bodymidblack2><I>"He's cut shipping costs by a third, 
+            streamlined his processes, and improved customer service."</I><BR><A 
+            href="http://www.transportation.com/about/media/customer_test.jsp">Actual 
+            customers tell you more</A> </SPAN></TD></TR>
+        <TR>
+          <TD 
+          background=images/horizontal_top_line_2.gif>&nbsp;</TD>
+          <TD rowSpan=3>&nbsp;</TD></TR></TBODY></TABLE><!--********************************************************************************************--></TD>
+    <TD vAlign=top width="99%">
+      <FORM name=becomeMember>
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=top width="50%"><IMG border=0 height=43 
+            src="images/welcometo.gif" width=265><BR><SPAN 
+            class=bodymidblack>Providing services and technology that make your 
+            global transportation and logistics management fast, easy, and cost 
+            effective</SPAN></TD>
+          <TD align=right class=bodymidblack vAlign=center><!--<map name="firsttime">
+				  <area shape="rect" coords="1,38,221,51" href="/servlet/RegistrationController?mode=new">
+                  <area shape="rect" coords="1,22,221,35" href="/services/index.jsp">
+                  </map>--><!--Marketing content and graphic <img src="/images/misc/clear.gif" border="0" height="1" width="20">--><IMG 
+            border=0 src="images/firsttimehere_2.gif" 
+            useMap=#firsttime> <!--                   <a href="http://www.libertyunites.com" target="_blank"><img src="/images/brand/flag.jpg" border="0" /></a>
+ --></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD align=right></TD></TR></TBODY></TABLE><INPUT name=mode type=hidden>
+      <SCRIPT language=JavaScript type=text/javascript>
+			function fnSubmittoRegController(strMode)
+			{
+			  document.becomeMember.mode.value = strMode;
+			  document.becomeMember.method = "Post";
+			  document.becomeMember.action ="/servlet/RegistrationController";
+			  document.becomeMember.submit();
+			}
+			</SCRIPT>
+       </FORM>
+      <TABLE border=0 cellPadding=5 cellSpacing=0 width="100%">
+        <TBODY>
+        <TR>
+          <TD background=images/vertical_left_line_1.gif 
+          bgColor=#0075ba width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD bgColor=#0075ba width="60%"><B><SPAN class=bodymidwhite>Ship 
+            anything, anywhere, now</SPAN></B></TD>
+          <TD background=images/vertical_left_line_2.gif 
+          bgColor=#0075ba width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD bgColor=#0075ba width="40%"><B><SPAN class=bodymidwhite>Lower 
+            your total costs</SPAN></B></TD>
+          <TD background=images/vertical_left_line_1.gif 
+          vAlign=center><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/vertical_left_line_1.gif 
+          bgColor=#f5f5f5 width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD bgColor=#f5f5f5 width="60%"><B><SPAN class=bodymidblack>Easy 
+            online services:</SPAN></B></TD>
+          <TD background=images/vertical_left_line_1.gif 
+          bgColor=#f5f5f5 width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD bgColor=#f5f5f5 width="40%"><B><SPAN 
+            class=bodymidblack>Logistics solutions:</SPAN></B></TD>
+          <TD vAlign=center><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/horizontal_top_line_4.gif 
+          bgColor=#ffffff></TD>
+          <TD background=images/horizontal_top_line_4.gif 
+          bgColor=#ffffff></TD>
+          <TD background=images/horizontal_top_line_4.gif 
+          bgColor=#ffffff></TD>
+          <TD background=images/horizontal_top_line_4.gif 
+          bgColor=#ffffff></TD>
+          <TD background=images/vertical_left_line_1.gif 
+          vAlign=center></TD></TR>
+        <TR>
+          <TD background=images/vertical_left_line_1.gif 
+          bgColor=#ffffff vAlign=top width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD background=images/clear.gif bgColor=#ffffff 
+          class=bodymidblack vAlign=top width="49%">
+            <TABLE border=0 cellPadding=0 cellSpacing=7 height="100%">
+              <TBODY>
+              <TR>
+                <TD class=bodymidblack width="50%">
+                  <TABLE border=0 cellPadding=0 cellSpacing=0 width="92%">
+                    <TBODY>
+                    <TR>
+                      <TD class=bodymidblack colSpan=3>&#8226;&nbsp;&nbsp;Rate 
+                        quotes<BR>&#8226;&nbsp;&nbsp;Pickup requests 
+                        <BR>&#8226;&nbsp;&nbsp;Bills of lading 
+                        <BR>&#8226;&nbsp;&nbsp;Tracking <BR>&nbsp;<BR></TD></TR>
+                    <TR>
+                      <TD class=bodymidblack><B>Get started:</B> <!--***quick quote***************************************************************************-->
+                        <TABLE border=1 borderColor=#cccccc cellPadding=5 
+                        cellSpacing=0 width="100%">
+                          <FORM action=/servlet/FCController method=post 
+                          name=shipperHome><INPUT name=fromPage type=hidden 
+                          value=home.index.jsp> <INPUT name=linkClicked 
+                          type=hidden> 
+                          <TBODY>
+                          <TR>
+                            <TD bgColor=#f5f5f5 class=bodysmallblack>
+                              <TABLE border=0 cellPadding=0 cellSpacing=5 
+                              width="100%">
+                                <TBODY>
+                                <TR>
+                                <TD class=bodymidblack2 vAlign=top>Zips:&nbsp; 
+                                </TD>
+                                <TD class=bodymidblack2 vAlign=top>
+                                <TABLE border=0 cellPadding=0 cellSpacing=0 
+                                width="100%">
+                                <TBODY>
+                                <TR>
+                                <TD class=bodysmallbluegrey vAlign=top><INPUT 
+                                maxLength=5 name=origZipCd size=3><BR>From </TD>
+                                <TD class=bodysmallbluegrey vAlign=top><INPUT 
+                                maxLength=5 name=destZipCd size=3><BR>&nbsp;To 
+                                </TD></TR></TBODY></TABLE></TD></TR>
+                                <TR>
+                                <TD class=bodymidblack2 vAlign=top>Pickup: </TD>
+                                <TD class=bodymidblack2 vAlign=top>
+                                <TABLE border=0 cellPadding=0 cellSpacing=0 
+                                width="100%">
+                                <TBODY>
+                                <TR>
+                                <TD class=bodysmallbluegrey vAlign=top><INPUT 
+                                maxLength=5 name=pickupDt size=1>&nbsp;<A 
+                                href="javascript:show_calendar('shipperHome.pickupDt','410','300','02/01/2002',null)"><IMG 
+                                align=absMiddle border=0 height=21 
+                                src="images/calendar.gif" 
+                                width=34></A> 
+                                </TD></TR></TBODY></TABLE></TD></TR>
+                                <TR>
+                                <TD class=bodymidblack2 
+                                vAlign=top>If&nbsp;LTL:&nbsp; </TD>
+                                <TD class=bodymidblack2 vAlign=top>
+                                <TABLE border=0 cellPadding=0 cellSpacing=0 
+                                width="100%">
+                                <TBODY>
+                                <TR>
+                                <TD class=bodysmallbluegrey vAlign=top><INPUT 
+                                maxLength=5 name=weight size=3><BR>Wt (lbs) 
+</TD>
+                                <TD class=bodysmallbluegrey vAlign=top><SELECT 
+                                name=cmdtyClassId><OPTION selected 
+                                value="">&nbsp;</OPTION><OPTION 
+                                value=50.0>50.0</OPTION><OPTION 
+                                value=55.0>55.0</OPTION><OPTION 
+                                value=60.0>60.0</OPTION><OPTION 
+                                value=65.0>65.0</OPTION><OPTION 
+                                value=70.0>70.0</OPTION><OPTION 
+                                value=77.5>77.5</OPTION><OPTION 
+                                value=85.0>85.0</OPTION><OPTION 
+                                value=92.5>92.5</OPTION><OPTION 
+                                value=100.0>100.0</OPTION><OPTION 
+                                value=110.0>110.0</OPTION><OPTION 
+                                value=125.0>125.0</OPTION><OPTION 
+                                value=150.0>150.0</OPTION><OPTION 
+                                value=175.0>175.0</OPTION><OPTION 
+                                value=200.0>200.0</OPTION><OPTION 
+                                value=250.0>250.0</OPTION><OPTION 
+                                value=300.0>300.0</OPTION><OPTION 
+                                value=400.0>400.0</OPTION><OPTION 
+                                value=500.0>500.0</OPTION></SELECT><BR>Class 
+                                </TD></TR></TBODY></TABLE></TD></TR>
+                                <TR>
+                                <TD align=left class=bodymidblack2 colSpan=2>
+                                <TABLE border=0 cellPadding=1 cellSpacing=0 
+                                width="100%">
+                                <TBODY>
+                                <TR>
+                                <TD class=bodysmallbluegrey vAlign=top><IMG 
+                                border=0 height=6 
+                                src="images/clear.gif" 
+                                width=1><BR><INPUT border=0 name=getQuote 
+                                src="images/getquotesbutton.gif" 
+                                type=image> </TD></TR>
+                                <TR>
+                                <TD class=bodysmallbluegrey vAlign=top><!--<img src="/images/misc/clear.gif" height="6" width="1" border="0" /><br />--><SPAN 
+                                class=bodymidblack2>&nbsp;Or try an <A 
+                                href="javascript:submit();" onmouseout=nd(); 
+                                onmouseover="return overlib('Use the advanced version of the quote request if you don\'t know the zips or if you have accessorials, hazmat, stopoffs, multiple freight classes, specific equipment requirements, or Canada/Mexico locations.')">advanced 
+                                quote&nbsp;<IMG border=0 
+                                src="images/infoboxicon.gif"></A></SPAN><BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></FORM></TBODY></TABLE><!--**quick quote****************************************************************************--></TD></TR></TBODY></TABLE><!--******************************************************************************--></TD>
+                <TD 
+                  background=images/vertical_left_line_3.gif>&nbsp;&nbsp;</TD>
+                <TD class=bodymidblack vAlign=top><!--global and expedited-->
+                  <TABLE border=0 borderColor=#cccccc cellPadding=0 
+                  cellSpacing=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=bodysmallblack>
+                        <TABLE border=0 cellPadding=0 cellSpacing=0>
+                          <TBODY>
+                          <TR>
+                            <TD class=bodymidblack><IMG border=0 height=10 
+                              src="images/clear.gif" 
+                              width=1><BR><A 
+                              href="http://www.transportation.com/util/redirect_yg.jsp?onSuccessAction=home" 
+                              target=_blank><B><IMG border=0 height=31 
+                              src="images/global_qbt.gif" 
+                              width=96></B></A><BR><IMG border=0 height=5 
+                              src="images/clear.gif" 
+                              width=1><BR>All online: <A 
+                              href="http://www.transportation.com/util/redirect_yg.jsp?onSuccessAction=home" 
+                              target=_blank>Quote&nbsp;Book&nbsp;Track</A><BR>International 
+                              shipping through Yellow Global, our wholly owned 
+                              subsidiary<BR><BR></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD 
+                      background=images/horizontal_top_line_8.gif 
+                      class=bodysmallblack>
+                        <TABLE border=0 cellPadding=0 cellSpacing=0 
+width="100%">
+                          <TBODY>
+                          <TR>
+                            <TD class=bodymidblack><SPAN 
+                              class=bodymidblack><BR><BR><B>Expedited</B></SPAN><BR>Guaranteed, 
+                              time-definite service in<BR>US, Canada, 
+                              Mexico<BR>Call 877-285-9126 </TD>
+                            <TD class=bodysmallblack vAlign=top><!--<img src="/images/buttons/gobutton.gif" border="0" />--></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!--global and expedited--></TD></TR></TBODY></TABLE></TD>
+          <TD background=images/vertical_left_line_1.gif 
+          bgColor=#ffffff vAlign=top width="1%"><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD>
+          <TD bgColor=#ffffff class=bodymidblack vAlign=top width="49%"><!--transportation manager-->
+            <TABLE border=0 cellPadding=0 cellSpacing=0>
+              <TBODY>
+              <TR>
+                <TD class=bodymidblack vAlign=top><IMG border=0 height=10 
+                  src="images/clear.gif" 
+                  width=1><BR>Streamline your operations, reduce costs, improve 
+                  customer service &#8211; <A 
+                  href="http://www.transportation.com/services/tm.jsp">Transportation 
+                  Manager</A>&#8482;<BR></TD></TR>
+              <TR>
+                <TD class=bodymidblack><BR>&#8226;&nbsp;&nbsp;Carrier procurement 
+                  <BR>&#8226;&nbsp;&nbsp;Transportation planning 
+                  <BR>&#8226;&nbsp;&nbsp;Dispatch <BR>&#8226;&nbsp;&nbsp;Audit &amp; payment 
+                  <BR>&#8226;&nbsp;&nbsp;Reporting <BR>&nbsp;<BR></TD></TR>
+              <TR>
+                <TD class=bodymidblack colSpan=2>Our customers are saving up 
+                  to 20% off their annual transportation budget. Find out if 
+                  Transportation Manager is a good fit for your business. </TD></TR>
+              <TR>
+                <TD><BR><A 
+                  href="http://www.transportation.com/services/tm.jsp"><IMG 
+                  border=0 
+                  src="images/tellmemorebutton.gif"></A> 
+              </TD></TR></TBODY></TABLE><!--transportation manager--></TD><!-- form for classifieds -->
+          <TD vAlign=center><IMG border=0 height=1 
+            src="images/clear.gif" width=1></TD></TR>
+        <TR>
+          <TD background=images/horizontal_top_line_4.gif 
+          bgColor=#ffffff class=bodymidblack colSpan=4><!--bottom other services section-->
+            <TABLE border=0 cellPadding=0 cellSpacing=0>
+              <TBODY>
+              <TR>
+                <TD background=images/clear.gif 
+                class=bodymidblack noWrap vAlign=top><B>Other services:</B> 
+</TD>
+                <TD background=images/clear.gif 
+                class=bodymidblack vAlign=top><IMG border=0 height=1 
+                  src="images/clear.gif" width=20> </TD>
+                <TD align=middle background=images/clear.gif 
+                class=bodymidblack vAlign=top>
+                  <TABLE align=center border=0 cellPadding=0 cellSpacing=0>
+                    <TBODY>
+                    <TR>
+                      <TD background=images/clear.gif 
+                      class=bodymidblack vAlign=top><IMG border=0 height=1 
+                        src="images/clear.gif" width=25> 
+                        <NOBR>Check out all our&nbsp;<A 
+                        href="http://www.transportation.com/services/index.jsp">services 
+                        at a glance</A>&nbsp;and&nbsp;<A 
+                        href="http://www.transportation.com/servlet/RegistrationController?mode=new">become 
+                        a member</A></NOBR> 
+            </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!--bottom other services section--></TD></TR>
+        <TR>
+          <TD background=images/horizontal_top_line_7.gif 
+          colSpan=4><IMG border=0 height=1 
+            src="images/clear.gif" 
+    width=1></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE border=0 cellPadding=4 cellSpacing=0 width="100%">
+  <TBODY>
+  <TR>
+    <TD background=images/dotbr.gif bgColor=#d7dce8><SPAN 
+      class=bodysmallblack><A href="http://www.transportation.com/">Home</A> | 
+      <A href="http://www.transportation.com/site/terms.jsp">Terms of use</A> | 
+      <A href="http://www.transportation.com/site/privacy.jsp">Privacy</A> 
+      <BR>Copyright © 1999-2001 Transportation.com. All Rights Reserved. 
+    </SPAN></TD></TR></TBODY></TABLE></BODY></HTML>

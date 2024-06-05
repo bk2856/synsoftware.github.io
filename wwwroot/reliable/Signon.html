@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META name="GENERATOR" content="IBM WebSphere Page Designer V3.0.2 for Windows">
+<META http-equiv="Content-Style-Type" content="text/css">
+</HEAD>
+<BODY link="#990000">
+<TABLE border="0" cellpadding=0 cellspacing=0>
+  <TBODY>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding="0" cellspacing="0" height="8">
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/topmen1.jpg" width="246" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen2.jpg" width="135" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen3.jpg" width="95" height="20" border="0"></TD>
+            <TD><IMG src="images/topmen4.jpg" width="114" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen5.jpg" width="189" height="22" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding=0 cellspacing=0>
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/homel.jpg" width="247" height="15" border="0"></TD>
+            <TD><A href="main.html" target="_self"><IMG src="images/home.jpg" width="70" height="15" border="0"></A></TD>
+            <TD><IMG src="images/homer.jpg" width="478" height="15" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding=0 cellspacing=0>
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/Image5.jpg" width="219" height="29" border="0"></TD>
+            <TD><A href="Reliable.html" target="_self"><IMG src="images/Image1 copy.jpg" width="108" height="29" border="0"></A></TD>
+            <TD><A href="Reg_Form.htm" target="_self"><IMG src="images/Image4 copy.jpg" width="102" height="29" border="0"></A></TD>
+            <TD><A href="products.html" target="_self"><IMG src="images/Image3 copy.jpg" width="91" height="29" border="0"></A></TD>
+            <TD><A href="talktous.html" target="_self"><IMG src="images/Image2 copy.jpg" width="105" height="29" border="0"></A></TD>
+            <TD><IMG src="images/Image22 copy.jpg" width="193" height="29" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+<SCRIPT language=vbscript>
+
+public sub callasp()
+cstno=document.form1.cstno.value
+password=document.form1.password.value
+ if (cstno="" and password="") then
+   alert("Invalid Logon")
+ else
+   call cookie() 
+   document.forms(0).submit()
+ end if  
+end sub
+
+public sub cookie()
+ strcoo=document.form1.cstno.value & "," & document.form1.password.value
+ document.cookie=strcoo
+end sub
+</SCRIPT>
+<FORM method="post" action="login.asp" id=form1 name=form1>
+<TABLE border="0" cellspacing="0" cellpading="0" height="65" width="306">
+
+    <TR valign="top" border="0" cellspacing="0" cellpading="0">
+      <TD width="613" height="50">
+      <IMG src="images/start.jpg" width="700" height="60" border="0"></TD>
+    </TR>
+  
+</TABLE>
+<TABLE height="210" width="763">
+ 
+    <TR>
+      <TD height="82" width="245" valign="middle">
+      <TABLE border="0">
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/item1.jpg" width="175" height="19" border="0"></TD>
+          </TR>
+          <TR>
+            <TD><IMG src="images/Cat.jpg" width="175" height="17" border="0"></TD>
+          </TR>
+          <TR>
+            <TD><IMG src="images/cust1.jpg" width="175" height="17" border="0"></TD>
+          </TR>
+          <TR>
+            <TD><IMG src="images/order.jpg" width="175" height="18" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD background="">
+      
+      
+      
+      <TD rowspan="2" width="241">
+      <TABLE width="238">
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/Imagenew3.jpg" width="159" height="42" border="0"></TD>
+            <TD></TD>
+          </TR>
+          <TR>
+            <TD width="111" background=""> &nbsp;<FONT color="#990000" size="2" face="Tahoma"><B> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp;UserID</B></FONT></TD>
+            <TD background=""><INPUT size="14" type="text" name="cstno"></TD>
+          </TR>
+          <TR>
+            <TD width="124" background=""><B><FONT size="2" color="#990000" face="Tahoma"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; Password</FONT></B></TD>
+            <TD background=""><INPUT size="14" type="password" name="password"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+      <TD width="322"><BR>
+      <FONT size="2"><B><FONT color="#ffffff" face="Tahoma">UserID</FONT></B></FONT><BR>
+      <BR>
+      <BR>
+      <BR>
+      <IMG src="images/SUBMIT2.jpg" onclick="callasp()" width="65" height="75" border="0"></TD>
+    </TABLE>
+<TABLE width="473" cellpadding="0" cellspacing="0">
+  <TBODY>
+    <TR>
+      <TD colspan="2"><IMG src="images/advt.jpg" width="464" height="25" border="0"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </TD>
+    </TR>
+    <TR>
+      <TD width="222"><IMG src="images/Animation5.gif" width="234" height="60" border="0"></TD>
+      <TD><IMG src="images/Animation5.gif" width="234" height="60" border="0"></TD>
+    </TR>
+  </TBODY>
+</TABLE><BR>
+<hr>
+<P> &nbsp; &nbsp; &nbsp;<FONT size="1" face="Tahoma">&COPY&nbsp;The Reliable Automatic Sprinkler Company
+Inc</FONT></P>
+<P>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <FONT color="darkblue"> &nbsp;</FONT><FONT color="darkblue" size="2"></FONT><FONT color="#000000" size="1" face="Tahoma"><A href="reliable.html" target="_self">[About Reliable</A> ]<A href="Reg_Form.htm" target="_self">[Membership]</A>[<A href="Products.html" target=_self>Products</A>]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; <BR>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[<A href="talktous.html" target="_self">Talk&nbsp;to&nbsp;us</A></FONT><FONT color="darkblue" size="-1" face="Tahoma">]</FONT><FONT color="darkblue">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; </FONT><BR>
+</P>
+
+
+</FORM>
+
+
+</BODY>
+
+</HTML>
+

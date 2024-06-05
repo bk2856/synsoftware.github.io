@@ -1,0 +1,207 @@
+<html>
+<head>
+<title> Reliable Sprinklers Catalog system</title>
+<style TYPE="TEXT/CSS">
+   <!--
+    #logo{position:absolute; top:0; left:0; z-index:7; visibility :visible}
+    #noselect{position:absolute; top:43; left:0;z-index:6;visibility :visible}
+    #product {position:absolute; top:43; left:0; z-index:5;visibility :visible}
+    #membership {position:absolute; top:43; left:0; z-index:4;visibility :visible}	
+    #about{position:absolute; top:43; left:0;z-index:3;visibility :visible}
+    #contact{position:absolute; top:43; left:0;z-index:2;visibility :visible}
+    #shops{position:absolute; top:43; left:0;z-index:1;visibility :visible}
+   -->
+</style>
+</head>
+<script LANGUAGE="JavaScript">
+// set browser platform global vars
+var isNav4, isIE4
+if (navigator.appVersion.charAt(0) == "4") {
+	if (navigator.appName == "Netscape") {
+		isNav4 = true
+	} else {
+		isIE4 = true
+	}
+}
+
+function Showbutton(but){
+  if (isNav4) {
+		
+		document.noselect.visibility = "hidden"
+		document.product.visibility = "hidden"
+		document.membership.visibility = "hidden"
+		document.about.visibility = "hidden"
+		document.contact.visibility = "hidden"
+                document.shops.visibility = "hidden"
+                eval("document."+but+".visibility = 'visible'")
+ 
+	      } 
+  if(isIE4)   {
+
+		document.all.noselect.style.visibility = "hidden"
+		document.all.product.style.visibility = "hidden"
+		document.all.membership.style.visibility = "hidden"
+		document.all.about.style.visibility = "hidden"
+		document.all.contact.style.visibility = "hidden"
+                document.all.shops.style.visibility = "hidden"
+		eval("document.all."+but+".style.visibility = 'visible'")
+	       }
+  return false;    
+}
+</script>
+
+
+
+
+
+<body onLoad="Showbutton('noselect')" background="images/back1.jpg">
+
+<span ID="logo">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="3"><img src="images/menua.jpg" WIDTH="677" HEIGHT="43"></td></tr>
+</table>
+</span>
+
+
+<span ID="noselect">
+<table BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td><img SRC="Images/menub.jpg" height="19" width="142"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('product')"><img SRC="Images/noselect1.jpg" border="0" height="19" width="88"></a></td>
+
+<td><a HREF="Reg.htm" target="bodyframe" onClick="Showbutton('membership')"><img SRC="Images/noselect2.jpg" border="0" height="19" width="92"></a></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('about')"><img SRC="Images/noselect3.jpg" border="0" height="19" width="109"></a></td>
+
+<td><a HREF="mailto:contact@reliable.com" target="bodyframe" onClick="Showbutton('contact')"><img SRC="Images/noselect4.jpg" border="0" height="19" width="95"></a></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('shops')"><img SRC="Images/noselect5.jpg" border="0" height="19" width="83"></a></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img SRC="Images/menuc.jpg" border="0" height="19" width="69"></td>
+</tr>
+</table>
+
+
+</span>
+
+<span ID="product">
+<table border="0" cellpadding="0" cellspacing="0"><tr>
+<td><img src="images/menub.jpg" WIDTH="142" HEIGHT="19"></td>
+
+<td><img src="images/product1.jpg" border="0" WIDTH="90" HEIGHT="19"></td>
+
+<td><a HREF="Reg.htm" target="bodyframe" onClick="Showbutton('membership')"><img src="images/product2.jpg" border="0" alt="Membership details" WIDTH="91" HEIGHT="19"></a></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('about')"><img src="images/product3.jpg" border="0" alt="Details of Reliable" WIDTH="106" HEIGHT="19"></a></td>
+
+<td><a HREF="mailto:contact@reliable.com" target="bodyframe" onClick="Showbutton('contact')"><img src="images/product4.jpg" border="0" alt="Contact Information" WIDTH="95" HEIGHT="19"></a></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('shops')"><img src="images/product5.jpg" border="0" alt="Shop details" WIDTH="84" HEIGHT="19"></a></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img src="images/menuc.jpg" border="0" alt="goes to Home page" WIDTH="69" HEIGHT="19"></a></td>
+</tr></table>
+</span>
+
+
+
+<span ID="membership">
+<table BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td><img SRC="Images/menub.jpg" height="19" width="142" border="0"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('product')"><img SRC="Images/membership1.jpg" border="0" height="19" width="88"></td>
+
+<td><img SRC="Images/membership2.jpg" border="0" height="19" width="83"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('about')"><img SRC="Images/membership3.jpg" border="0" height="19" width="116"></td>
+
+<td><a HREF="mailto:contact@reliable.com" target="bodyframe" onClick="Showbutton('contact')"><img SRC="Images/membership4.jpg" border="0" height="19" width="95"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('shops')"><img SRC="Images/membership5.jpg" border="0" height="19" width="84"></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img SRC="Images/menuc.jpg" border="0" alt="goes to Home page" height="19" width="69"></td>
+</tr>
+</table>
+</span>
+
+
+
+<span ID="about">
+<table BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td><img SRC="Images/menub.jpg" border="0" height="19" width="142"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('product')"><img SRC="Images/about1.jpg" border="0" height="19" width="88"></td>
+
+<td><a HREF="Reg.htm" target="bodyframe" onClick="Showbutton('membership')"><img SRC="Images/about2.jpg" border="0" height="19" width="91"></td>
+
+<td><img SRC="Images/about3.jpg" border="0" height="19" width="108"></td>
+
+<td><a HREF="mailto:contact@reliable.com" target="bodyframe" onClick="Showbutton('contact')"><img SRC="Images/about4.jpg" border="0" height="19" width="95"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('shops')"><img SRC="Images/about5.jpg" border="0" height="19" width="84"></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img SRC="Images/menuc.jpg" border="0" alt="goes to Home page" height="19" width="69"></td>
+</tr>
+</table>
+</span>
+
+
+
+
+<span ID="contact">
+<table border="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td><img SRC="Images/menub.jpg" border="0" height="19" width="142"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('product')"><img SRC="Images/contact1.jpg" border="0" height="19" width="88"></td>
+
+<td><a HREF="Reg.htm" target="bodyframe" onClick="Showbutton('membership')"><img SRC="Images/contact2.jpg" border="0" height="19" width="91"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('about')"><img SRC="Images/contact3.jpg" border="0" height="19" width="108"></td>
+
+<td><img SRC="Images/contact4.jpg" border="0" height="19" width="95"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('shops')"><img SRC="Images/contact5.jpg" border="0" height="19" width="84"></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img SRC="Images/menuc.jpg" border="0" alt="goes to Home page" height="19" width="69"></td>
+</tr>
+</table>
+</span>
+
+
+
+
+<span ID="shops">
+<table border="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td><img SRC="Images/menub.jpg" border="0" height="19" width="142"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('product')"><img SRC="Images/shop1.jpg" border="0" height="19" width="87"></td>
+
+<td><a HREF="Reg.htm" target="bodyframe" onClick="Showbutton('membership')"><img SRC="Images/shop2.jpg" border="0" height="19" width="92"></td>
+
+<td><a HREF="a.htm" target="bodyframe" onClick="Showbutton('about')"><img SRC="Images/shop3.jpg" border="0" height="19" width="109"></td>
+
+<td><a HREF="mailto:contact@reliable.com" target="bodyframe" onClick="Showbutton('contact')"><img SRC="Images/shop4.jpg" border="0" height="19" width="95"></td>
+
+<td><img SRC="Images/shop5.jpg" border="0" height="19" width="83"></td>
+
+<td><a HREF="newsignon.htm" target="bodyframe" onClick="Showbutton('noselect')">
+<img SRC="Images/menuc.jpg" border="0" alt="goes to Home page" height="19" width="69"></td>
+</tr>
+</table>
+</span>
+
+
+</body>
+</html>
+
+
+

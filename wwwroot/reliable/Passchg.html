@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+<script language="vbscript">
+	dim Passwordflag 
+		
+		'------- Procedure to check the password
+		sub Passwordchk()
+			Passwordflag=false			
+			if not (formpasschg.newpass.value = formpasschg.Confirm.value) then
+				msgbox "Your Confirmation of password failed !",vbinformation+4096,"Error"
+				formpasschg.confirm.focus
+                          
+				Passwordflag = true
+			end if
+		end sub
+      function formpasschg_onsubmit
+  if not formpasschg.oldpass.value="" then
+
+     if not formpasschg.newpass.value="" then
+				if not len(formpasschg.newpass.value) < 5 then
+                                          	if not formpasschg.Confirm.value ="" then
+								call passwordchk()
+								if Passwordflag=false then 
+									exit function
+								else
+									formpasschg_onsubmit=false
+								end if								
+							else
+								msgbox "Confirmation of password is Required",vbinformation + 4096,"Error Message"								
+								formpasschg.Confirm.focus
+								formpasschg_onsubmit=false 
+							end if
+					        else
+							msgbox "Password must contain minimum five charactors ",vbinformation+4096,"Error Message"							
+							formpasschg.newpass.focus
+							formpasschg_onsubmit=false 
+                                         end if   
+                                        else
+                   				msgbox "New Password is Required",vbinformation+4096,"Error Message"							
+							formpasschg.newpass.focus
+							formpasschg_onsubmit=false 
+						end if
+                                       else
+                   				msgbox "Old Password is Required",vbinformation+4096,"Error Message"							
+							formpasschg.oldpass.focus
+							formpasschg_onsubmit=false 
+						end if
+
+
+      end function 
+     
+	Public sub callimgchange2()
+       document.images("img2").src="images/0item1.jpg" 
+	end sub
+     
+       Public sub revimgchange2()
+       document.images("img2").src="images/item1.jpg" 
+	end sub
+       
+       Public sub callimgchange3()
+       document.images("img3").src="images/0cat.jpg" 
+	end sub
+     
+       Public sub revimgchange3()
+       document.images("img3").src="images/cat.jpg" 
+	end sub
+
+       Public sub callimgchange4()
+       document.images("img4").src="images/0cust1.jpg" 
+	end sub
+     
+       Public sub revimgchange4()
+       document.images("img4").src="images/cust1.jpg" 
+	end sub
+     
+       Public sub callimgchange5()
+       document.images("img5").src="images/0order.jpg" 
+	end sub
+     
+       Public sub revimgchange5()
+       document.images("img5").src="images/order.jpg" 
+	end sub
+
+</script>
+<meta name="GENERATOR" content="IBM WebSphere Page Designer V3.0.2 for Windows">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title></title>
+</head>
+
+<body link="#990000">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><img src="images/topmen1.jpg" width="246" height="22" border="0"></td>
+            <td><img src="images/topmen2.jpg" width="135" height="22" border="0"></td>
+            <td><img src="images/topmen3.jpg" width="95" height="20" border="0"></td>
+            <td><img src="images/topmen4.jpg" width="114" height="22" border="0"></td>
+            <td><img src="images/topmen5.jpg" width="189" height="22" border="0"></td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><img src="images/homel.jpg" width="247" height="15" border="0"></td>
+            <td><a href="main.html" target="_self"><img src="images/home.jpg" width="70" height="15" border="0"></a></td>
+            <td><img src="images/homer.jpg" width="478" height="15" border="0"></td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><img src="images/Image5.jpg" width="219" height="29" border="0"></td>
+            <td><a href="Reliable.html" target="_self"><img src="images/Image1%20copy.jpg" width="108" height="29" border="0"></a></td>
+            <td><a href="Reg_Form.htm" target="_self"><img src="images/Image4%20copy.jpg" width="102" height="29" border="0"></a></td>
+            <td><a href="products.html" target="_self"><img src="images/Image3%20copy.jpg" width="91" height="29" border="0"></a></td>
+            <td><a href="talktous.html" target="_self"><img src="images/Image2%20copy.jpg" width="105" height="29" border="0"></a></td>
+            <td><img src="images/Image411.jpg" width="54" height="29" border="0"></td>
+            <td width="28"><img src="images/Image511.jpg" width="77" height="29" border="0"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<form method="post" action="passchg.asp" id="formpasschg" name="formpasschg">
+
+<table><tbody><tr valign="top" border="0" cellspacing="0" cellpading="0">
+      <td><img src="images/start.jpg" width="700" height="60" border="0"></td>
+    </tr></tbody></table>
+<table width="614" cellpadding="0" cellspacing="0">
+ 
+    <tr>
+      <td rowspan="3">
+      <table border="0">
+        
+         <tr>
+            <td><a href="Item_Lookup.htm" target="_self"><img id="img2" src="images/item1.jpg" onmouseover="callimgchange2()" onmouseout="revimgchange2()" border="0" WIDTH="175" HEIGHT="19"></a></td>
+          </tr>
+          <tr>
+            <td><a href="catalogue.html" target="_self"><img id="img3" src="images/Cat.jpg" onmouseover="callimgchange3()" onmouseout="revimgchange3()" border="0" WIDTH="175" HEIGHT="17"></a></td>
+          </tr>
+          <tr>
+            <td><img id="img4" src="images/cust1.jpg" border="0" WIDTH="175" HEIGHT="17"></td>
+          </tr>
+          <tr>
+            <td><a href="order.html" target="_self"><img id="img5" src="images/order.jpg" onmouseover="callimgchange5()" onmouseout="revimgchange5()" border="0" WIDTH="175" HEIGHT="18"></a></td>
+          </tr>
+      </table>
+      </td>
+      <td width="450" rowspan="2" height="174">
+      <table cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><img src="images/Imagea2.jpg" width="299" height="56" border="0"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table width="348" cellpadding="0" cellspacing="0" bgcolor="#fbfce9" border="1">
+        <tbody>
+          <tr>
+            <td cellpading="0" border="0" cellspacing="0" height="117" width="384" bgcolor="#fff0f0">
+            <table height="103">
+              <tbody>
+                <tr>
+                  <td><b>&nbsp; &nbsp; &nbsp; &nbsp;</b><font color="#004080" size="2" face="Tahoma">Enter&nbsp;Your&nbsp;Old&nbsp;Password</font></td>
+                  <td><input size="15" type="password" name="oldpass" id="oldpass"></td>
+                </tr>
+                <tr>
+                  <td><font color="#000099" size="2" face="Tahoma"><b>&nbsp; &nbsp; &nbsp; </b></font><font color="#004080" size="2" face="Tahoma"><b>&nbsp;</b>Enter Your New Password</font><b>&nbsp;</b></td>
+                  <td><input size="15" type="password" name="newpass" id="newpass"></td>
+                </tr>
+                <tr>
+                  <td><b>&nbsp; &nbsp; &nbsp; &nbsp;</b><font color="#004080" size="2" face="Tahoma">Confirm New Password&nbsp;</font><font color="#000099" size="2" face="Tahoma"><b> </b></font><b>&nbsp;</b></td>
+                  <td><input size="15" type="password" name="confirm" id="confirm"></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><input type="submit" name="Submit" value="Submit"><input type="reset"></td>
+                </tr>
+              </tbody>
+            </table>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp;
+            &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+            &nbsp;
+            &nbsp; &nbsp; &nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      </tr>
+    <tr>
+      </tr>
+  </table>
+<br>
+<br><br>
+<hr>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <font color="darkblue"> &nbsp;</font><font color="#000000" size="1" face="Tahoma"><a href="reliable.html" target="_self">[About Reliable</a> ]<a href="Reg_Form.htm" target="_self">[Membership]</a>[<a href="Products.html" target="_self">Products</a>]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[<a href="talktous.html" target="_self">Talk&nbsp;to&nbsp;us</a></font><font color="darkblue" size="-1" face="Tahoma">]</font><font color="darkblue">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; </font><br>
+</form></body>
+</html>

@@ -1,0 +1,277 @@
+<HTML>
+<HEAD>
+<TITLE>Registration Form</TITLE>
+<SCRIPT>
+
+var flgdot,flgat
+function validateregform(){
+ flgdot="F",flgat="F"
+ fnam=document.form1.tfname.value
+ lnam=document.form1.tlname.value
+ email=document.form1.temailid.value
+ login=document.form1.tlogin.value
+ pwd=document.form1.tpasswd.value
+ confirm=document.form1.tconfirm.value
+
+ len = email.length
+ len1 = pwd.length
+
+ if(fnam=="")
+  {alert("First name required"); 
+   document.form1.tfname.focus()
+   return false}
+
+ if(lnam=="")
+  {alert("Last name required"); 
+  document.form1.tlname.focus()
+   return false}
+ 
+
+ if(email=="")
+  {alert("Email id required"); 
+   document.form1.temailid.focus()
+   return false}
+ else
+  for(i=0;i<len;i++)
+  {if(email.substring(i,i+1)==".")
+    flgdot="T"
+   if(email.substring(i,i+1)=="@")
+    flgat="T"}
+   
+
+ if(login=="")
+  {alert("Login id is null")
+  document.form1.tlogin.focus()
+  return false}
+
+ if(pwd=="")
+  {alert("Password required"); 
+   document.form1.tpasswd.focus()
+   return false}
+
+ if(confirm=="")
+  {alert("Confirm password required"); 
+   document.form1.tconfirm.focus()
+   return false}
+
+ if(!(pwd=="") && !(confirm==""))
+   if(len1 < 5)
+    {alert("Password should have  minimum 5 digits");
+    return false}
+   if(pwd != confirm)
+    {alert("password not confirmed correctly")
+    return false}
+
+if((flgdot=="T")&&(flgat=="T"))
+  return true
+else
+  {alert("Invalid Email id \n\nEg: xyz@mail.com")
+   return false} 
+return true
+}
+
+
+function Checkpasswd(f){
+ if(f.tpasswd.value.length < 5)
+ {alert("Password should have  minimum 5 digits");
+  document.form1.tpasswd.focus()}
+ }
+
+
+
+
+function Checkemail(f){
+ flgdot="F",flgat="F"
+ email=f.temailid.value
+ len=email.length
+
+ if(email=="")
+  {alert("Email id required")
+   f.temailid.focus()
+   return false}
+ else
+  for(i=0;i<len;i++)
+  {if(email.substring(i,i+1)==".")
+    flgdot="T"
+   if(email.substring(i,i+1)=="@")
+    flgat="T"} 
+
+ if(!(flgdot=="T")||!(flgat=="T"))
+   {alert("Invalid Email id \n\nEg: xyz@mail.com")
+    f.temailid.focus()
+    return false} 
+ }
+
+
+function Checklogin(f){
+if(f.tlogin.value=="")
+{alert("Login id is null")
+ f.tlogin.focus()}
+}
+
+
+</SCRIPT>
+</HEAD>
+
+<BODY background = "images/back.jpg">
+<center>
+
+
+<FORM name = "form1" action="../servlet/rel.Relregservlet" method="post"  
+ onSubmit="return validateregform()">
+<br>
+<table border="0" cellpadding="1" cellspacing="0" bgcolor="#182F86">
+<th colspan="2" align="left"><font color="#ffffff"><B><U><I>Company        details</I></U>&nbsp;:</B> 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<b>Required</b>
+</font></th>
+<tr><td>
+
+<TABLE border="0" cellpadding=2 cellspacing=0 bgcolor="#EBEBED">
+<tr bgcolor="#D9DADD">
+<td >&nbsp;<FONT FACE=ARIAL SIZE=2>* First Name :</FONT></td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tfname">&nbsp;&nbsp;</FONT></td>
+</tr>
+
+<tr>
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>* Last Name :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tlname"></FONT></td>
+</tr>
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>Company Name :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tcname"></FONT></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>Job Title :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tjobtit"></FONT></td>
+</tr>
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>DayTime Phone :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tdayph"></FONT></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>Evening Phone :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="teveph"></FONT></td>
+</tr>
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>Fax&nbsp;:&nbsp;</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tfax"></FONT></td>
+</tr>
+
+
+<tr>
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>* Email Id:</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="temailid" 
+onChange="Checkemail(this.form)"></FONT></td>
+</tr>
+
+
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2>Company Website :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="20" name="tcweb"></FONT></td>
+</tr>
+</TABLE>
+
+</td></tr></table>
+
+
+<br>	
+<table border="0" cellpadding="1" cellspacing="0" bgcolor="#182F86">
+<th align="left"><font color="#FFFFFF"><B><U><I>Business Type :</I></U></B></font></th><tr><td>
+<TABLE BORDER="0" cellpadding=2 cellspacing=0 bgcolor="#D9DADD">
+<tr bgcolor="#D9DADD"><td>&nbsp;&nbsp;
+<INPUT type=radio name=rtype value="S" checked=true><FONT FACE=ARIAL SIZE=2>SmallScale</FONT>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<INPUT type=radio name=rtype value="L"><FONT FACE=ARIAL SIZE=2>   LargeScale</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
+<INPUT type=radio name=rtype value="O"><FONT FACE=ARIAL SIZE=2>Other</FONT>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td></tr></TABLE>
+</td></tr></table>
+
+
+
+
+
+<br>
+<table border="0" cellpadding="1" cellspacing="0" bgcolor="#182F86">
+<th colspan="2" align="left">
+   <font color="#FFFFFF"><B><U><I>Address</I></U>&nbsp;:</B></font>
+</th>
+<tr><td>
+<TABLE border="0" cellpadding="2" cellspacing="0" bgcolor="#EBEBED">
+<tr bgcolor="#D9DADD">
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>Street :</FONT>&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="30" name="tstreet">
+</FONT>&nbsp;</td>
+</tr>
+
+<tr>
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>City :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="13" name="tcity">
+
+ &nbsp;&nbsp;&nbsp;State :
+ <input type="text" size="6" name="tstate"></FONT></td>
+</tr>
+
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>Zip :</FONT>&nbsp;&nbsp;</td>   
+<td>&nbsp;&nbsp;<FONT FACE=ARIAL SIZE=2><input type="text" size="6" name="tzip">
+ &nbsp;&nbsp;&nbsp;Country :
+ <input type="text" size="11" name="tcountry"></FONT></td>
+</tr>
+
+
+</TABLE>
+</td></tr>
+</table>
+
+
+<br>
+<table border="0" cellpadding="1" cellspacing="0" bgcolor="#182F86">
+<th align="left"  colspan="2"> <font color="#FFFFFF"><B><U><I>Login Information </I></U>:</B></font></th>
+<tr><td>
+<TABLE border="0"  cellpadding="2" cellspacing="0" bgcolor="#EBEBED">
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>* Login Id :</FONT>&nbsp;&nbsp;&nbsp;&nbsp;</td>   
+<td><FONT FACE=ARIAL SIZE=2><input type="text" size="19" name="tlogin" 
+onChange="Checklogin(this.form)"></FONT>&nbsp;&nbsp;</td>
+</tr>
+
+<tr>
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>* Password :</FONT>&nbsp;&nbsp;&nbsp;&nbsp;</td>   
+<td><FONT FACE=ARIAL SIZE=2><input type="password" size="19" name="tpasswd" onChange="Checkpasswd(this.form)"></FONT>&nbsp;&nbsp;</td>
+</tr>
+
+<tr bgcolor="#D9DADD">
+<td>&nbsp;<FONT FACE=ARIAL SIZE=2>* Confirm Password :</FONT>&nbsp;&nbsp;&nbsp;&nbsp;</td>   
+<td><FONT FACE=ARIAL SIZE=2><input type="password" size="19" name="tconfirm"></FONT>
+&nbsp;&nbsp;</td>
+</tr>
+
+</TABLE>
+</td></tr></table>
+
+<br><br>
+<TABLE border="0" cellpadding="0" cellspacing="0"><TR>
+<TD><Input type="submit" value="Submit" name="bsubmit"></TD>
+<TD>&nbsp;</TD><TD>&nbsp;</TD>
+<TD><Input type="reset" value="Reset" name="breset"></TD>
+</TR></TABLE>
+
+
+</FORM>
+</center>
+</BODY>
+</HTML>
+
+
+
+
+

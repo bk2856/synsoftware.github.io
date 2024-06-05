@@ -1,0 +1,150 @@
+ssc {
+	FONT-SIZE: 24px
+}
+.headers {
+	FONT-FAMILY: impact,arial,helvetica; FONT-SIZE: 25px
+}
+.s1 {
+	FONT-SIZE: 10px
+}
+.s2 {
+	FONT-SIZE: 12px
+}
+.s3 {
+	FONT-SIZE: 14px
+}
+.s4 {
+	FONT-SIZE: 16px
+}
+.linkOff {
+	COLOR: #c00000; FONT-FAMILY: arial,helvetica; FONT-SIZE: 12px; TEXT-DECORATION: underline
+}
+.linkOn {
+	COLOR: #c00000; FONT-FAMILY: arial,helvetica; FONT-SIZE: 12px; TEXT-DECORATION: underline
+}
+.select {
+	FONT-FAMILY: arial,sans-serif; FONT-SIZE: 12px
+}
+.head1white {
+	COLOR: white; FONT-FAMILY: "Trebuchet MS"; FONT-SIZE: 13px
+}
+.head1green {
+	COLOR: #390; FONT-FAMILY: Arial, Verdana, "Trebuchet MS"; FONT-SIZE: 12px; LINE-HEIGHT: 14pt
+}
+.head1greensmall {
+	COLOR: #390; FONT-FAMILY: Arial, Verdana, "Trebuchet MS"; FONT-SIZE: 10px; LINE-HEIGHT: 10pt
+}
+.head1greenmid {
+	COLOR: #390; FONT-FAMILY: Arial, Verdana, "Trebuchet MS"; FONT-SIZE: 11px; LINE-HEIGHT: 11pt
+}
+.head2green {
+	COLOR: #390; FONT-FAMILY: Arial, Verdana, "Trebuchet MS"; FONT-SIZE: 17px
+}
+.head2black {
+	COLOR: #000; FONT-FAMILY: Arial, "Trebuchet MS", Verdana; FONT-SIZE: 18px
+}
+.head2blue {
+	COLOR: #0066cc; FONT-FAMILY: Arial, "Trebuchet MS", Verdana; FONT-SIZE: 20px
+}
+.head1black {
+	COLOR: #000; FONT-FAMILY: Arial, Verdana, "Trebuchet MS"; FONT-SIZE: 11px
+}
+.head2red {
+	COLOR: #c00; FONT-FAMILY: Arial, "Trebuchet MS", Verdana; FONT-SIZE: 18px
+}
+.bodysmallorange {
+	COLOR: #c63; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.bodymidorange {
+	COLOR: #c63; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+.bodysmallorange2 {
+	COLOR: #c63; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.buttongreen {
+	COLOR: green
+}
+.buttonorange {
+	COLOR: #c63
+}
+.bodysmallgrey2 {
+	COLOR: #999; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.bodysmallwhite {
+	COLOR: white; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.bodysmallblack {
+	COLOR: #000; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px; LINE-HEIGHT: 10pt
+}
+.bodysmallbluegrey {
+	COLOR: #708090; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.bodymidblack {
+	COLOR: #000; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+.bodymidwhite {
+	COLOR: white; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+.bodymidblack2 {
+	COLOR: #000; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 11px
+}
+.bodymidblue {
+	COLOR: #0066cc; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+.bodymidgrey {
+	COLOR: #666; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 11px
+}
+.bodymidred {
+	COLOR: #c00; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 11px
+}
+.bodymidred2 {
+	COLOR: #c00; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+.bodymidblack3 {
+	COLOR: #000; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 18px
+}
+.bodymidblackhighlight {
+	BACKGROUND-COLOR: yellow; COLOR: #000; FONT-FAMILY: "Trebuchet MS"; FONT-SIZE: 11px
+}
+.headerwhite {
+	COLOR: white; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.promofooter {
+	COLOR: white; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 12px
+}
+A {
+	COLOR: black
+}
+A:hover {
+	BACKGROUND-COLOR: yellow; COLOR: black; TEXT-DECORATION: none
+}
+A.headerwhite {
+	COLOR: white; TEXT-DECORATION: none
+}
+A.infobox {
+	TEXT-DECORATION: none
+}
+A.bodysmallorange:hover {
+	COLOR: #c63; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px; TEXT-DECORATION: none
+}
+A.bodysmallorange {
+	COLOR: #c63; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px; TEXT-DECORATION: none
+}
+A.headerwhite:hover {
+	BACKGROUND-COLOR: yellow; COLOR: #0075ba; TEXT-DECORATION: none
+}
+INPUT {
+	FONT-FAMILY: arial,sans-serif; FONT-SIZE: 12px
+}
+SELECT {
+	FONT-FAMILY: arial,sans-serif; FONT-SIZE: 12px
+}
+.bodysmallred {
+	COLOR: #c00; FONT-FAMILY: Arial, "Trebuchet MS"; FONT-SIZE: 10px
+}
+.active {
+	BACKGROUND-COLOR: #669900; COLOR: white; FONT-SIZE: 11px; FONT-WEIGHT: bold
+}
+.historic {
+	BACKGROUND-COLOR: #cccccc; COLOR: black; FONT-SIZE: 11px; FONT-WEIGHT: bold
+}

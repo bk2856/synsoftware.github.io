@@ -1,0 +1,206 @@
+
+<html>
+<head>
+<title>mhFrame</title>
+	<style TYPE="text/css">
+
+  #companyNameSpan {position:absolute; top:0;left:0; z-index:1; visibility: visible; }	
+
+  #tvSpan {position:absolute; top:13;left:392; z-index:2; visibility: visible; }	
+
+  #adSpan {position:absolute; top:20;left:400; z-index:2; visibility: visible; }	
+  #txSpan {position:absolute; top:38;left:215; z-index:4; visibility: visible; }	
+  
+  #pianoSpan {position:absolute; top:40;left:56;  z-index:3; visibility: visible; }	
+    
+
+</style>
+
+<script language="javascript">
+var clickFlag = true;	
+var mh_delay = 1000;
+var mbndx = 0
+var mendx = 6;
+var curmh=0;
+var themh = new Array();
+var mhPath = "images/";
+var ch_delay = 2000;
+var stopch = 0;
+var curch=0;
+var chmax=5;
+var thech = new Array();
+var chPath = "images/";
+
+
+function rollAnim() {
+ browser_name = navigator.appName;
+ if (browser_name == "Netscape") { loaded = 'false';}  else { loaded = 'true'; };
+// alert(browser_name);
+
+if (loaded == 'true') {
+//startmh();
+//startch();
+mh_timer = setTimeout('startmh();',1000);
+ch_timer = setTimeout('startch();',2000);
+}
+}
+
+
+//begin ch animations
+function startch() {
+		nextch();
+		ch_timer = setTimeout('startch();',ch_delay);
+	}
+
+
+//get nextch and the beginning and ending numbers for current mh
+function nextch() {
+  //  alert("curch"+curch);
+curch++;
+	if (curch > chmax) {
+	   curch = 0;
+	}
+	theArray = top.compch;
+	mbndx = top.compmbndx[curch];
+	mendx = top.compmendx[curch];
+	ch_delay = top.compchdelay[curch];
+    mh_delay = top.compmhdelay[curch];
+ 	if (theArray) {
+		preloadch(theArray[curch]);
+	} 
+}
+
+
+//change the displayed ch, set the mbndx and mendx
+function preloadch(ch_name) {
+
+	next = thech.length;
+	current = chPath + ch_name;
+		if(checkThech(ch_name) == false) {
+		thech[next] = new Image(160,40);
+		thech[next].src = chPath + ch_name;
+		changech(ch_name);
+// alert(current);	
+	} else {
+		changech(ch_name);
+	// alert(current+"old");	
+	}
+}
+//change the playing mh
+function changech(ch_name) {
+	changeImg('ch', chPath + ch_name);
+}
+
+function checkThech(imgName) {
+	value = false;
+	existing = chPath + imgName;
+	for(i=0; i<thech.length; i++) {
+		if(thech[i].src == existing) {
+		value = true;
+		} 
+	}
+	return value;
+}
+
+//Image Swapper
+function changeImg(nme, sc) {
+//var theObj=new Image;
+//	if (document.images) {
+// alert(top.document.images[0].src)
+// }
+ //		document.layers[nme].document.images[0].src = sc;
+//			} else  {
+//theObj=document.mh;
+//theObj.src=sc;
+		document.images[nme].src = sc;
+	
+//		}
+}
+
+//}
+//begin mh animations - we can use setinterval in java1.2 and avoid the two timeouts
+
+function startmh() {
+//	mrunning = 0;
+	nextmh();
+//alert("curmh, bndx, endx, mh-delay "+curmh+" "+mbndx+" "+mendx+" "+mh_delay+" "+curch);
+
+//	if (mrunning != 1) {
+	mh_timer = setTimeout('startmh();',mh_delay);
+//	}
+}
+//begin mh animations
+function nextmh() {
+    themArray = top.compmh;
+	if (themArray) { 
+    	curmh++;
+		if (curmh < mbndx) curmh = mbndx;
+        if (curmh > mendx) curmh = mbndx; 
+			preloadmh(themArray[curmh]);
+		} 
+}
+
+
+//change the playing mh
+function preloadmh(mh_name) {
+	next = themh.length;
+	current = mhPath + mh_name;
+		if(checkThemh(mh_name) == false) {
+		themh[next] = new Image(140,40);
+		themh[next].src = mhPath + mh_name;
+		changemh(mh_name);
+		} else {
+		changemh(mh_name);
+		}
+}
+//change the playing mh
+function changemh(mh_name) {
+	changeImg('mh', mhPath + mh_name);
+}
+function checkThemh(imgName) {
+	value = false;
+	existing = mhPath + imgName;
+	for(i=0; i<themh.length; i++) {
+		if(themh[i].src == existing) {
+		value = true;
+		} 
+	}
+	return value;
+}
+
+
+
+//-->
+</script>
+
+
+</head>
+
+<body background="images/bgimg.gif" leftMargin="0" onLoad="rollAnim()">
+<span id="companyNameSpan">
+<img border="0" id="bg" src="images/synergyname.gif" WIDTH="309" HEIGHT="38">
+</span>
+<span id="tvSpan">
+<img border="0" id="bg" src="images/tvimg.gif" height="70" width="202">
+
+</span>
+<span id="pianoSpan">
+<map name="piano">
+<area alt="link1" coords="0,0,75,20" href="consult.html"   shape="RECT">
+<area alt="link2" coords="76,0,150,20" href="edevelop.html"   shape="RECT">
+<area alt="link3" coords="0,21,75,40" href="outsource.html"   shape="RECT">
+<area alt="link4" coords="76,21,150,40" href="esolutions.html#ASPS"   shape="RECT">
+</map>
+<img src="images/services.gif" border="0" usemap="#piano" WIDTH="163" HEIGHT="38">
+
+</span>
+<span id="adSpan">
+<a href="esolutions.html"   onclick="this.href = top.compmhLink[curmh]"><img border="0" height="58" name="mh" src="images/esolutions.gif" width="188"></a>
+
+</span>
+<span id="txSpan">
+<a href="esynergy.html"   onclick="this.href = top.compchLink[curch]"><img border="0" name="ch" src="images/syntext.gif" WIDTH="160" HEIGHT="40"></a>
+
+</span>
+</body>
+</html>

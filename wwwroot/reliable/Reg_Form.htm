@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<HTML>
+	<HEAD>
+		<META name=VI60_defaultClientScript content=VBScript>
+<META name="GENERATOR" content="IBM WebSphere Page Designer V3.0.2 for Windows">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE> Registration Form </TITLE>
+	</HEAD>
+	<BODY bgColor=#fffffb aLink=chartreuse link=darkblue vLink=red bottomMargin=0 topMargin=2 leftMargin=0 rightMargin=0 background="">			
+	<script language=vbscript>			
+		dim Passwordflag 
+		
+		'------- Procedure to check the password
+		sub Passwordchk()
+			Passwordflag=false			
+			if not (Regform.Password.value = Regform.Confirm.value) then
+				msgbox "Your Confirmation of password failed !",vbinformation+4096,"Error"
+				Regform.Password.focus
+                          
+				Passwordflag = true
+			end if
+		end sub
+		
+		'-------- Procedure to check EmailID
+		sub Emailchk()			
+			count1=0
+			count2=0
+			if not Regform.Email.value ="" then
+				for i = 1 to len(Regform.Email.value)
+					if mid(Regform.Email.value,i,1)="@" then
+						count1=count1+1
+					end if
+					if mid(Regform.Email.value,i,1)="." then
+						Count2=Count2+1
+					end if
+				next
+				if (count1<>1 OR count2=0) then
+					msgbox "Type a valid EmailID like (abc@xyz.com)",vbinformation+4096,"Error"
+					Regform.Email.focus 					
+				else
+					Regform.Email.value=lcase(Regform.Email.value)
+				end if
+			end if
+		end sub			
+		
+		'------- Procedure to check FormValidations					
+		function regform_onsubmit()
+			if not document.Regform.Fname.value="" then
+				if not Regform.Lname.value="" then
+					if not Regform.Email.value="" then
+					if not Regform.Cstno.value="" then  	
+						if not Regform.Password.value="" then
+						If not len(Regform.Password.value) < 5 then
+                                          	if not Regform.Confirm.value ="" then
+								call passwordchk()
+								if Passwordflag=false then 
+									exit function
+								else
+									regform_onsubmit=false
+								end if								
+							else
+								msgbox "Confirmation of password is Required",vbinformation + 4096,"Error Message"								
+								Regform.Confirm.focus
+								regform_onsubmit=false 
+							end if
+					        else
+							msgbox "Password must contain minimum five charactors ",vbinformation+4096,"Error Message"							
+							Regform.Password.focus
+							regform_onsubmit=false 
+                                         end if   
+                                        else
+                   				msgbox "Password is Required",vbinformation+4096,"Error Message"							
+							Regform.Password.focus
+							regform_onsubmit=false 
+						end if
+					else
+							msgbox "User ID is Required",vbinformation+4096,"Error Message"							
+							Regform.cstno.focus
+							regform_onsubmit=false 
+						end if
+
+                                 	else
+						msgbox "Email is Required",vbinformation+4096,"Error Message"
+						Regform.Email.focus
+						regform_onsubmit=false 
+					end if
+				else
+					msgbox "Last Name is Required",vbinformation+4096,"Error Message"				
+					Regform.Lname.focus 
+					regform_onsubmit=false
+				end if
+			else
+				msgbox "First Name is Required",vbinformation+4096,"Error"
+				Regform.Fname.focus				
+				regform_onsubmit=false
+				 'onsubmit= "formvalidation()"
+			end if	
+          	 						
+		end function
+
+  				
+	</script>
+<form method="post" action="Reg_Form.asp" target="frmlow" name="Regform" style="BACKGROUND-COLOR: #fffffb">
+
+
+<TABLE border="0" cellpadding=0 cellspacing=0>
+  <TBODY>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding=0 cellspacing=0>
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/topmen1.jpg" width="246" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen2.jpg" width="135" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen3.jpg" width="95" height="20" border="0"></TD>
+            <TD><IMG src="images/topmen4.jpg" width="114" height="22" border="0"></TD>
+            <TD><IMG src="images/topmen5.jpg" width="189" height="22" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding=0 cellspacing=0>
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/homel.jpg" width="247" height="15" border="0"></TD>
+            <TD><A href="main.html" target="_self"><IMG src="images/home.jpg" width="70" height="15" border="0"></A></TD>
+            <TD><IMG src="images/homer.jpg" width="478" height="15" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+    <TR>
+      <TD>
+      <TABLE border="0" cellpadding=0 cellspacing=0>
+        <TBODY>
+          <TR>
+            <TD><IMG src="images/Image5.jpg" width="219" height="29" border="0"></TD>
+            <TD><A href="Reliable.html" target="_self"><IMG src="images/Image1 copy.jpg" width="108" height="29" border="0"></A></TD>
+            <TD><A href="Reg_Form.htm" target="_self"><IMG src="images/Image4 copy.jpg" width="102" height="29" border="0"></A></TD>
+            <TD><A href="products.html" target="_self"><IMG src="images/Image3 copy.jpg" width="91" height="29" border="0"></A></TD>
+            <TD><A href="talktous.html" target="_self"><IMG src="images/Image2 copy.jpg" width="105" height="29" border="0"></A></TD>
+            <TD><IMG src="images/Image22 copy.jpg" width="112" height="29" border="0"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+
+<TABLE>
+  <TBODY>
+    <TR>
+      <TD><IMG src="images/Reg.jpg" width="702" height="26" border="0"></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<TABLE border="0" style="BACKGROUND-COLOR: #fffffb;bgcolor=" white" width="662">
+  
+  <TBODY><TR>
+      <TD colspan="2"> 
+     <FONT face=Tahoma Size=2><FONT color="black">First&nbsp;Name:<FONT color="black" face="Tahoma" size="2">[</FONT><FONT color="#990000" face="Tahoma" size="2">*</FONT><FONT color="black" face="Tahoma" size="2">]</FONT></FONT></FONT></TD>
+      <TD width="168">
+      <P><font size=2><INPUT align="right" id="Fname" maxlength="50" name="Fname" size="15"  ></font></P></TD>
+      <TD width="114"><FONT size="2" face="Tahoma">Street:</FONT></TD>
+      <TD><font size=2><INPUT name="Add1" size="18"></font></TD>
+      </TR><TR>
+      <TD colspan="2" width="124"><FONT color="black" face="Tahoma" size="2">Last Name:&nbsp;[</FONT><FONT color="#990000" face="Tahoma" size="2">*</FONT><FONT color="black" face="Tahoma" size="2">] </FONT></TD>
+      <TD><font size=2><INPUT size="15" type="text" name="lname"></FONT></TD>
+      <TD></TD>
+      <TD><font size=2><INPUT name="Add2" size="18"></font></TD>
+      </TR><TR>
+    <TD colspan="2"><FONT color=black><FONT face=Tahoma size=2>Company Name </FONT>  : </FONT></TD>
+    <TD><font size=2><INPUT align=right maxLength=50 name=Cname id="cname" 
+      size=15></font> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      </TD>
+      <TD><FONT color=black face=Tahoma size=2 
+     >City : </FONT></TD>
+    <TD><font size=2><INPUT name="city" size="18"></font></TD>
+      </TR><TR>
+    <TD colspan="2">
+      <P><FONT color=black face=Tahoma size=2 
+     >Job Title : 
+      </FONT></P></TD>
+      <TD width="161"><font size=2><INPUT align=right maxLength=50 name=Job id="job" size=15 
+      ></font></TD>
+      <TD><FONT color=black face=Tahoma size=2 
+     >State :</FONT></TD>
+      <TD width="141"><font size=2><INPUT size="4" name="state" ></font>Zip 
+      :&nbsp;&nbsp;&nbsp;<font size=2> <INPUT size="5" name="zip" ></font></TD>
+    </TR><TR>
+    <TD colspan="2"><FONT color=black face=Tahoma size=2 
+     >Daytime Phone  : </FONT></TD>
+      <TD width="156"><font size=2><INPUT size="15"></font></TD>
+      <TD><FONT color=black><FONT 
+      face=Tahoma size=2>Country 
+      </FONT>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></TD>
+    <TD><font size=2><!--METADATA type="DynamicData" startspan
+<INPUT size="18" type="text" dynamicelement nameproperty="country" value="USA">
+--><INPUT name="<%= country %>" size="18" type="text" value="USA"><!--METADATA type="DynamicData" endspan--></font></TD>
+      </TR><TR>
+    <TD colspan="2"><FONT color=black face=Tahoma size=2 
+     >Evening Phone : </FONT></TD>
+      <TD width="151"><font size=2><INPUT align=right maxLength=15 name=Ephone size=15 id="ephone"
+      style="BACKGROUND-COLOR: white; : 18px; WIDTH: 146px"></font></TD>
+      <TD><FONT color="black" face=Tahoma size=2 
+     >Email : </FONT>[<FONT color="#990000" face="Tahoma">*</FONT>]</TD>
+      <TD width="153"><font size=2><INPUT size="18" type="text" name="Email" type="Email"></font></TD>
+    </TR><TR valign="top">
+      <TD colspan="2" width="106"><FONT color=black face=Tahoma size=2 
+     >Fax : </FONT></TD>
+      <TD><font size=2><INPUT align=right maxLength=15 name=Fax id="fax" size=15 
+      style="BACKGROUND-COLOR: white; : 18px; WIDTH: 146px"></font></TD>
+      <TD><FONT color=darkred face=Tahoma size=2 
+     ><U><STRONG>Login&nbsp;Details 
+      </STRONG></U></FONT> </TD>
+    <TD></TD>
+      </TR><TR>
+      <TD colspan="2" width="115"><FONT color=black><FONT face=Tahoma 
+      size=2>Company&nbsp;Website </FONT>:</FONT></TD>
+      <TD><font size=2><INPUT size="15" type="text" maxlength="57" name="cweb"></font></TD>
+      <TD><FONT face=Tahoma size=2>User ID:</FONT>[<FONT color="#990000">*</FONT>]</TD>
+    <TD><font size=2><INPUT name="cstno" size="18"></font></TD>
+      </TR><TR>
+      <TD colspan="2" bgcolor="#ffffff"></TD>
+      <TD bgcolor="#ffffff"><B><FONT color="#990000"><STRONG>&nbsp;</STRONG></FONT></B><FONT color="#000099"><B><STRONG>&nbsp;</STRONG></B><U><B>Required Dat</B></U><U><B>a</B></U></FONT> &nbsp;[<B><FONT color="#990000">*</FONT></B>]</TD>
+      <TD><FONT color="black" face=Tahoma size=2 
+     >Password :[<FONT color="#990000">*</FONT>] </FONT></TD>
+    <TD><font size=2><INPUT size="18" type="password" name="Password"></font></TD>
+      </TR><TR>
+      <TD colspan="2"></TD>
+      <TD></TD>
+      <TD><FONT color="black" face=Tahoma size=2 
+     >Confirm:[<FONT color="#990000">*</FONT>] </FONT></TD>
+    <TD><font size=2><INPUT size="18" type="password" name="Confirm"></font></TABLE>
+<TABLE>
+  <TBODY>
+    <TR>
+      <TD width="514">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp;</TD>
+      <TD><INPUT type="reset" name="Reset" value="Reset"><INPUT type="submit" name="Submit" value="Submit"></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<BR><BR><BR>
+<BR>
+<hr>
+<P>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; <FONT color="darkblue"> &nbsp;</FONT><FONT color="darkblue" size="2"></FONT><FONT color="#000000" size="1" face="Tahoma"><A href="reliable.html" target="_self">[About Reliable</A> ]<A href="Reg_Form.htm" target="_self">[Membership]</A>[<A href="Products.html" target=_self>Products</A>]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; <BR>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[<A href="talktous.html" target="_self">Talk&nbsp;to&nbsp;us</A></FONT><FONT color="darkblue" size="-1" face="Tahoma">]</FONT><FONT color="darkblue">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; </FONT><BR>
+
+</FORM></BODY>
+
+</HTML>

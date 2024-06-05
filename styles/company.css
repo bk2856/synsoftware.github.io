@@ -1,0 +1,39 @@
+ssc  {
+	font-size : 24px;
+}
+
+.headers  {
+	font-size : 25px;
+	font-family : impact,arial,helvetica;
+}
+
+.s1  {
+	font-size : 10px;
+}
+
+.s2  {
+	font-size : 12px;
+}
+
+.s3  {
+	font-size : 14px;
+}
+
+.s4  {
+	font-size : 16px;
+}
+
+.linkOff  {
+	font-family : arial,helvetica;
+	font-size : 12px;
+	text-decoration : underline;
+	color : #C00000;
+}
+
+.linkOn  {
+	font-family : arial,helvetica;
+	font-size : 12px;
+	text-decoration : underline;
+	color : #C00000;
+}
+

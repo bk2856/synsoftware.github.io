@@ -1,0 +1,117 @@
+
+<html>
+<head>
+<title></title>
+<script>
+var isnav4,isie4;
+ if(navigator.appVersion.charAt(0)=="4"){
+    if(navigator.appName=="Netscape")
+      {isnav4=true}
+    else
+      {isie4=true}
+  }        
+
+
+ if(document.images){
+   image11 = new Image;
+   image12 = new Image;
+   image21 = new Image;
+   image22 = new Image;
+ }
+
+ image11.src = "images/menunewmem.jpg";
+ image12.src = "images/menunewmem1.jpg";
+ image21.src = "images/menusignon.jpg";
+ image22.src = "images/menusignon1.jpg";
+
+ 
+
+function swapon(img){
+  imgobj=window.document.images
+  if(document.images)
+   imgobj[img].src=eval(img + "2.src");
+ }
+
+function swapoff(img){
+  if(document.images)
+   imgobj[img].src=eval(img + "1.src");
+ }
+
+function checkuser(){
+id=document.form1.userid.value
+pwd=document.form1.passwd.value
+if((id=="")||(pwd==""))
+ {alert("Invalid login entry")
+ return false}
+return true;
+}
+</script>
+</head>
+<body background="images/back2.jpg">
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="4"><img src="images/reldescsignon.jpg" width="618" height="107" border="0"></td>
+    </tr>
+    <tr>
+      <td ALIGN="RIGHT"><img src="images/menuleft.jpg" width="88" height="205" border="0"></td>
+      <td>
+      <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td><img src="images/menutop.jpg" width="99" height="59" border="0"></td>
+          </tr>
+          <tr>
+            <td><a href="reg.htm" onMouseOver="swapon('image1')" onMouseOut="swapoff('image1')">
+            <img src="images/menunewmem.jpg" name="image1" width="99" height="44" border="0"></td>
+          </tr>
+          <tr>
+            <td><img src="images/menublank.jpg" width="99" height="8" border="0"></td>
+          </tr>
+          <tr>
+            <td><a href="signon.htm" onMouseOver="swapon('image2')" onMouseOut="swapoff('image2')">
+               <img src="images/menusignon.jpg" width="99" height="29" name="image2" border="0"></td>
+          </tr>
+          <tr>
+            <td><img src="images/menubottom.jpg" width="99" height="65" border="0"></td>
+          </tr>
+
+      </table>
+      </td>
+      <td>
+      <img src="images/menuright2.jpg" width="79" height="205" border="0">
+      </td>
+      <td>
+      <form name="form1" action="../servlet/rel.Relsignservlet" method="post" onSubmit="return checkuser()">
+      <table border="0" cellpadding="2" cellspacing="3" align="center"><tr><td>
+      <table BORDER="0" cellpadding="0" cellspacing="0"><tr>
+      <td colspan="2" width="344" align="center"><img src="images/login.jpg" WIDTH="227" HEIGHT="46"></td></tr>
+      <tr><td>&nbsp;</td></tr>
+              <tr bgcolor="#ffffff">
+              <td><b>
+                <font face="arial" size="2" color="#6064B2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Userid:</font>
+              </b></td>
+              <td><font face="arial" size="2" color="#6064B2"><input type="text" name="userid" size="16"></td>
+              </tr>
+              <tr bgcolor="#ffffff">
+              <td><b>
+              <font face="arial" size="2" color="#6064B2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password:&nbsp;&nbsp;</font></b></td>
+              <td><font face="arial" size="2" color="#6064B2"><input type="password" name="passwd" size="16"></td>
+              </tr>
+              <tr bgcolor="#ffffff">
+              <td colspan="2" align="center"><br><input type="submit" name="blogin" value="Login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              </tr>
+      </table>
+      </td></tr></table>
+      </form>
+      </td>
+
+    </tr>
+     <tr>
+     <td colspan="4" align="center"><hr></td>
+    </tr>
+    <tr>
+     <td colspan="4" align="center">&amp;COPY;&nbsp; The Reliable Automatic Sprinkler Company Inc.</td>
+    </tr>
+
+</table>
+</body>
+</html>
